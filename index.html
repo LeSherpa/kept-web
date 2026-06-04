@@ -400,6 +400,200 @@
     }
 
     /* ════════════════════════════════
+       TELEGRAM MOCKUP
+    ════════════════════════════════ */
+    .tg-mockup {
+      width: 100%;
+      max-width: 380px;
+      margin: 0 auto;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+    }
+
+    .tg-header {
+      background: #1A1625;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .tg-header-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6B21A8, #9B50D8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .tg-header-info { flex: 1; }
+
+    .tg-header-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      line-height: 1.2;
+    }
+
+    .tg-header-sub {
+      font-size: 0.72rem;
+      color: #8A8A9A;
+    }
+
+    .tg-header-dots { color: #8A8A9A; }
+
+    .tg-body {
+      background: #0C0A14;
+      padding: 12px 16px;
+      min-height: 400px;
+      max-height: 480px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      scroll-behavior: smooth;
+    }
+
+    .tg-body::-webkit-scrollbar { width: 0; }
+
+    .tg-msg {
+      max-width: 80%;
+      font-size: 14px;
+      line-height: 1.45;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    .tg-msg.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tg-msg-bot  { align-self: flex-start; }
+    .tg-msg-user { align-self: flex-end; }
+
+    .tg-msg-text {
+      padding: 8px 10px;
+      white-space: pre-line;
+      word-break: break-word;
+    }
+
+    .tg-msg-bot .tg-msg-text {
+      background: #1A1625;
+      border-radius: 4px 12px 12px 12px;
+      color: #fff;
+    }
+
+    .tg-msg-user .tg-msg-text {
+      background: #534AB7;
+      border-radius: 12px 4px 12px 12px;
+      color: #fff;
+    }
+
+    .tg-msg-time {
+      font-size: 10px;
+      color: rgba(255,255,255,0.42);
+      margin-left: 6px;
+      vertical-align: bottom;
+      white-space: nowrap;
+    }
+
+    .tg-msg-photo {
+      width: 160px;
+      height: 120px;
+      background: #1E1A35;
+      border-radius: 10px 4px 10px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .tg-msg-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      max-width: 88%;
+      align-self: flex-start;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    .tg-msg-group.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tg-msg-group .tg-msg {
+      opacity: 1;
+      transform: none;
+      transition: none;
+      max-width: none;
+    }
+
+    .tg-kbd {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .tg-kbd-btn {
+      background: #1E1A35;
+      border: 1px solid #534AB7;
+      border-radius: 8px;
+      padding: 7px 14px;
+      color: #A78BFA;
+      font-size: 12px;
+      font-family: 'Inter', sans-serif;
+      cursor: default;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+
+    .tg-kbd-btn.active {
+      background: #534AB7;
+      border-color: #7B6FD4;
+      color: #fff;
+    }
+
+    .tg-typing {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 10px 14px;
+      background: #1A1625;
+      border-radius: 4px 12px 12px 12px;
+      align-self: flex-start;
+    }
+
+    .tg-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #8A8A9A;
+      animation: tgDotPulse 1.2s ease-in-out infinite;
+    }
+
+    .tg-dot:nth-child(2) { animation-delay: 0.2s; }
+    .tg-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes tgDotPulse {
+      0%, 60%, 100% { opacity: 0.3; transform: scale(0.85); }
+      30%           { opacity: 1;   transform: scale(1.1);  }
+    }
+
+    /* ════════════════════════════════
        PRICING
     ════════════════════════════════ */
     .pricing-grid {
@@ -644,37 +838,20 @@
         ✦ MEET MARGOT ✦
       </div>
 
-      <div id="margot-chat" role="log" aria-label="Margot speaking" aria-live="polite"></div>
-
-      <div id="margot-steps" class="margot-steps" aria-label="How Kept works">
-        <div class="mini-step">
-          <div class="mini-step-icon">
-            <svg viewBox="0 0 26 26" aria-hidden="true">
-              <rect x="5" y="11" width="16" height="12" rx="2.5"/>
-              <path d="M9 11V8a4 4 0 0 1 8 0v3"/>
-              <circle cx="13" cy="17" r="1.5" fill="url(#grad-stroke)" stroke="none"/>
+      <div class="tg-mockup">
+        <div class="tg-header">
+          <div class="tg-header-avatar">K</div>
+          <div class="tg-header-info">
+            <div class="tg-header-name">Kept</div>
+            <div class="tg-header-sub">bot</div>
+          </div>
+          <div class="tg-header-dots" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>
             </svg>
           </div>
-          <span class="mini-step-label">Leave something</span>
         </div>
-        <div class="mini-step">
-          <div class="mini-step-icon">
-            <svg viewBox="0 0 26 26" aria-hidden="true">
-              <circle cx="13" cy="13" r="9"/>
-              <polyline points="13,7 13,13 17,15"/>
-            </svg>
-          </div>
-          <span class="mini-step-label">Choose the moment</span>
-        </div>
-        <div class="mini-step">
-          <div class="mini-step-icon">
-            <svg viewBox="0 0 26 26" aria-hidden="true">
-              <rect x="3" y="7" width="20" height="15" rx="2.5"/>
-              <polyline points="3,7 13,16 23,7"/>
-            </svg>
-          </div>
-          <span class="mini-step-label">They find it</span>
-        </div>
+        <div class="tg-body" id="tg-chat-body"></div>
       </div>
 
     </div>
@@ -836,39 +1013,141 @@
     var CHAT_SPEED   = 46;  // ms per character
     var CHAT_PAUSE   = 520; // ms pause after each line before next starts
 
-    async function runMargotIntro() {
-      var chat  = document.getElementById('margot-chat');
-      var steps = document.getElementById('margot-steps');
+    // ── Telegram chat mockup ─────────────────────────────────────────
+    async function runTgChat() {
+      var body = document.getElementById('tg-chat-body');
+      if (!body) return;
 
-      await delay(400);
+      function esc(s) {
+        return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+      }
+      function ts(t) { return '<span class="tg-msg-time">' + (t || '9:41') + '</span>'; }
 
-      // Lines appear one by one with typewriter + pause between
-      for (var i = 0; i < CHAT_LINES.length; i++) {
-        var p = document.createElement('p');
-        p.className = 'chat-line';
-        chat.appendChild(p);
-        await typeInto(p, CHAT_LINES[i], CHAT_SPEED);
-        if (i < CHAT_LINES.length - 1) await delay(CHAT_PAUSE);
+      async function typing() {
+        var d = document.createElement('div');
+        d.className = 'tg-typing';
+        d.innerHTML = '<span class="tg-dot"></span><span class="tg-dot"></span><span class="tg-dot"></span>';
+        body.appendChild(d);
+        body.scrollTop = body.scrollHeight;
+        await delay(800);
+        body.removeChild(d);
       }
 
-      // 3. Step icons fade in after final line
-      await delay(620);
-      steps.classList.add('visible');
+      async function fadeIn(el) {
+        await delay(30);
+        el.classList.add('visible');
+        await delay(60);
+        body.scrollTop = body.scrollHeight;
+        await delay(400);
+      }
+
+      async function botMsg(text, time) {
+        await typing();
+        var el = document.createElement('div');
+        el.className = 'tg-msg tg-msg-bot';
+        el.innerHTML = '<div class="tg-msg-text">' + esc(text) + ts(time) + '</div>';
+        body.appendChild(el);
+        await fadeIn(el);
+      }
+
+      async function botKbd(text, buttons, time) {
+        await typing();
+        var wrap = document.createElement('div');
+        wrap.className = 'tg-msg-group';
+        var msgEl = document.createElement('div');
+        msgEl.className = 'tg-msg tg-msg-bot';
+        msgEl.innerHTML = '<div class="tg-msg-text">' + esc(text) + ts(time) + '</div>';
+        var kbd = document.createElement('div');
+        kbd.className = 'tg-kbd';
+        buttons.forEach(function(label) {
+          var b = document.createElement('button');
+          b.className = 'tg-kbd-btn';
+          b.textContent = label;
+          kbd.appendChild(b);
+        });
+        wrap.appendChild(msgEl);
+        wrap.appendChild(kbd);
+        body.appendChild(wrap);
+        await fadeIn(wrap);
+        return kbd;
+      }
+
+      async function userMsg(text, time) {
+        var el = document.createElement('div');
+        el.className = 'tg-msg tg-msg-user';
+        el.innerHTML = '<div class="tg-msg-text">' + esc(text) + ts(time) + '</div>';
+        body.appendChild(el);
+        await fadeIn(el);
+      }
+
+      async function userPhoto() {
+        var el = document.createElement('div');
+        el.className = 'tg-msg tg-msg-user';
+        el.innerHTML = '<div class="tg-msg-photo">' +
+          '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+          '<rect x="3" y="3" width="18" height="18" rx="2"/>' +
+          '<circle cx="8.5" cy="8.5" r="1.5"/>' +
+          '<polyline points="21 15 16 10 5 21"/>' +
+          '</svg>' +
+          '<span class="tg-msg-time" style="position:absolute;bottom:6px;right:8px">9:42</span>' +
+          '</div>';
+        body.appendChild(el);
+        await fadeIn(el);
+      }
+
+      async function tapBtn(kbd, label) {
+        var target = null;
+        kbd.querySelectorAll('.tg-kbd-btn').forEach(function(b) {
+          if (b.textContent === label) target = b;
+        });
+        if (!target) return;
+        target.classList.add('active');
+        await delay(360);
+        target.classList.remove('active');
+        await delay(120);
+      }
+
+      while (true) {
+        body.innerHTML = '';
+
+        await botMsg('Oh, you found me. Good. 💅');
+        await botMsg('I keep things safe until the moment is right.');
+        await userMsg('/keep', '9:41');
+
+        var kbd4 = await botKbd('Who is this for?', ['For myself', 'For Jane'], '9:41');
+        await delay(800);
+        await tapBtn(kbd4, 'For Jane');
+        await userMsg('For Jane', '9:41');
+
+        await botMsg('What do you want to leave for Jane?\nText, photo, audio, video or a sticker.', '9:41');
+        await userPhoto();
+
+        var kbd8 = await botKbd('Good choice. When should Jane find this?', ['Tomorrow morning', 'Choose a date'], '9:42');
+        await delay(800);
+        await tapBtn(kbd8, 'Tomorrow morning');
+        await userMsg('Tomorrow morning', '9:42');
+
+        await botMsg('Kept. 🔒\nJane will find this tomorrow at 9:00 AM. I won’t say a word.', '9:42');
+
+        await delay(2200);
+        body.scrollTo({top: 0, behavior: 'smooth'});
+        await delay(1000);
+      }
     }
 
-    var margotFired = false;
-    var margotObs = new IntersectionObserver(function(entries) {
+    var tgFired = false;
+    var tgObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
-        if (e.isIntersecting && !margotFired) {
-          margotFired = true;
-          runMargotIntro();
-          margotObs.unobserve(e.target);
+        if (e.isIntersecting && !tgFired) {
+          tgFired = true;
+          runTgChat();
+          tgObs.unobserve(e.target);
         }
       });
-    }, { threshold: 0.15 });
+    }, {threshold: 0.15});
 
-    var margotSection = document.getElementById('margot-intro');
-    if (margotSection) margotObs.observe(margotSection);
+    var tgSection = document.getElementById('margot-intro');
+    if (tgSection) tgObs.observe(tgSection);
 
     // ── Margot hero sprite ──────────────────────────────────────────
     function drawMargot(containerId) {
