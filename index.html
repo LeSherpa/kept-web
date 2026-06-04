@@ -53,7 +53,7 @@
       width: 96px;
       height: 96px;
       margin: 0 auto 8px;
-      animation: margot-float 3s ease-in-out infinite;
+      opacity: 0;
     }
 
     .margot-pixel {
@@ -1088,6 +1088,20 @@
       .pricing-grid  { grid-template-columns: 1fr; gap: 20px; }
       .section       { padding: 72px 20px; }
     }
+    @keyframes margot-land {
+      0%   { transform: translateY(-220px); opacity: 0; }
+      60%  { transform: translateY(8px);    opacity: 1; }
+      75%  { transform: translateY(-6px); }
+      85%  { transform: translateY(4px); }
+      92%  { transform: translateY(-2px); }
+      100% { transform: translateY(0px); }
+    }
+    @keyframes margot-squash {
+      0%   { transform: scaleX(1)    scaleY(1); }
+      60%  { transform: scaleX(1.18) scaleY(0.82); }
+      75%  { transform: scaleX(0.92) scaleY(1.08); }
+      100% { transform: scaleX(1)    scaleY(1); }
+    }
     body::after {
       content: '';
       position: fixed;
@@ -1170,7 +1184,7 @@
     <div class="margot-intro-inner">
 
       <div class="margot-sprite" id="margot-intro-sprite"
-           style="width:96px;height:96px;margin:0 auto 16px;">
+           style="width:96px;height:96px;margin:0 auto 16px;opacity:1;animation:margot-float 3s ease-in-out infinite;">
       </div>
 
       <div class="pixel-label" style="text-align:center;">
@@ -1425,40 +1439,42 @@
     // END HERO ENHANCEMENT 2
 
     // ── Hero typewriter (62ms/char — 20% slower than original 52ms) ──
-    (async function heroTypewriter() {
-      await delay(500);
+    function startTypewriter() {
+      (async function heroTypewriter() {
+        await delay(500);
 
-      var h1    = document.getElementById('hero-headline');
-      var after = document.getElementById('hero-after');
-      var SPEED = 89;
+        var h1    = document.getElementById('hero-headline');
+        var after = document.getElementById('hero-after');
+        var SPEED = 89;
 
-      await typeInto(h1, 'Some things are', SPEED);
+        await typeInto(h1, 'Some things are', SPEED);
 
-      await delay(90);
-      h1.innerHTML = 'Some things are<br>';
-      var gradSpan = document.createElement('span');
-      gradSpan.className = 'grad-text typing';
-      h1.appendChild(gradSpan);
+        await delay(90);
+        h1.innerHTML = 'Some things are<br>';
+        var gradSpan = document.createElement('span');
+        gradSpan.className = 'grad-text typing';
+        h1.appendChild(gradSpan);
 
-      var node = document.createTextNode('');
-      gradSpan.appendChild(node);
-      var j = 0;
-      var line2 = 'worth keeping.';
-      await new Promise(function(resolve) {
-        function tick() {
-          node.textContent = line2.slice(0, ++j);
-          if (j < line2.length) { setTimeout(tick, SPEED); }
-          else { gradSpan.classList.remove('typing'); resolve(); }
-        }
-        setTimeout(tick, SPEED);
-      });
+        var node = document.createTextNode('');
+        gradSpan.appendChild(node);
+        var j = 0;
+        var line2 = 'worth keeping.';
+        await new Promise(function(resolve) {
+          function tick() {
+            node.textContent = line2.slice(0, ++j);
+            if (j < line2.length) { setTimeout(tick, SPEED); }
+            else { gradSpan.classList.remove('typing'); resolve(); }
+          }
+          setTimeout(tick, SPEED);
+        });
 
-      // HERO ENHANCEMENT 2: trigger reaction 300ms after typewriter finishes
-      setTimeout(triggerMargotReact, 300);
+        // HERO ENHANCEMENT 2: trigger reaction 300ms after typewriter finishes
+        setTimeout(triggerMargotReact, 300);
 
-      await delay(250);
-      after.style.opacity = '1';
-    })();
+        await delay(250);
+        after.style.opacity = '1';
+      })();
+    }
 
     // ── Scroll indicator ─────────────────────────────────────────────
     var scrollIndicator = document.getElementById('scroll-indicator');
@@ -1743,6 +1759,22 @@
       });
     }
     drawMargot('margot-hero', 6);
+    (function() {
+      var hero = document.getElementById('margot-hero');
+      if (!hero) return;
+      setTimeout(function() {
+        hero.style.transition = 'none';
+        hero.style.opacity = '1';
+        hero.style.animation = 'margot-land 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards';
+        setTimeout(function() {
+          hero.style.animation = 'margot-land 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards, margot-squash 0.35s ease-out forwards';
+        }, 450);
+        setTimeout(function() {
+          hero.style.animation = 'margot-float 3s ease-in-out infinite';
+          startTypewriter();
+        }, 800);
+      }, 150);
+    })();
     drawMargot('margot-intro-sprite', 6);
     drawMargot('evo-sprite-0', 6, 'dormant');
     drawMargot('evo-sprite-1', 6, 'awakened');
