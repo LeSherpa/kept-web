@@ -48,6 +48,30 @@
       text-transform: uppercase;
     }
 
+    .margot-sprite {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 8px;
+      animation: margot-float 3s ease-in-out infinite;
+    }
+
+    .margot-pixel {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+    }
+
+    @keyframes margot-float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes margot-blink {
+      0%, 90%, 100% { opacity: 1; }
+      95% { opacity: 0; }
+    }
+
     .grad-text {
       background: var(--gradient);
       -webkit-background-clip: text;
@@ -579,13 +603,10 @@
   <!-- ════════════════ HERO ════════════════ -->
   <section id="hero">
     <div style="position:relative;z-index:1;display:block;text-align:center">
-      <div class="logo-mark">
-        <svg viewBox="0 0 38 38" aria-hidden="true">
-          <rect x="4" y="10" width="30" height="22" rx="3"/>
-          <polyline points="4,10 19,22 34,10"/>
-          <circle cx="19" cy="29" r="3" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
-          <line x1="19" y1="32" x2="19" y2="35" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
-        </svg>
+      <div class="margot-sprite" id="margot-hero">
+      </div>
+      <div class="pixel-label" style="margin-bottom:16px;">
+        ✦ MARGOT ✦
       </div>
 
       <h1 class="hero-headline" id="hero-headline" aria-label="Some things are worth keeping."></h1>
@@ -847,6 +868,61 @@
 
     var margotSection = document.getElementById('margot-intro');
     if (margotSection) margotObs.observe(margotSection);
+
+    // ── Margot hero sprite ──────────────────────────────────────────
+    function drawMargot(containerId) {
+      var container = document.getElementById(containerId);
+      if (!container) return;
+      var pixels = [];
+
+      // outline — #4A1A8A
+      for (var x = 2; x <= 13; x++) pixels.push({x:x, y:0,  c:'#4A1A8A'});
+      pixels.push({x:1,  y:1,  c:'#4A1A8A'});
+      pixels.push({x:14, y:1,  c:'#4A1A8A'});
+      for (var x = 1; x <= 14; x++) pixels.push({x:x, y:15, c:'#4A1A8A'});
+
+      // body — #7B2FBE
+      for (var y = 2; y <= 14; y++) {
+        for (var x = 2; x <= 13; x++) pixels.push({x:x, y:y, c:'#7B2FBE'});
+      }
+
+      // flap — #9B50D8
+      for (var x = 2;  x <= 13; x++) pixels.push({x:x, y:2, c:'#9B50D8'});
+      for (var x = 3;  x <= 12; x++) pixels.push({x:x, y:3, c:'#9B50D8'});
+      for (var x = 4;  x <= 11; x++) pixels.push({x:x, y:4, c:'#9B50D8'});
+      for (var x = 5;  x <= 10; x++) pixels.push({x:x, y:5, c:'#9B50D8'});
+      for (var x = 6;  x <= 9;  x++) pixels.push({x:x, y:6, c:'#9B50D8'});
+      pixels.push({x:7, y:7, c:'#9B50D8'});
+      pixels.push({x:8, y:7, c:'#9B50D8'});
+
+      // eyes — #FFFFFF
+      pixels.push({x:4,  y:9, c:'#FFFFFF'});
+      pixels.push({x:5,  y:9, c:'#FFFFFF'});
+      pixels.push({x:10, y:9, c:'#FFFFFF'});
+      pixels.push({x:11, y:9, c:'#FFFFFF'});
+
+      // blush — #E8407A
+      pixels.push({x:3,  y:10, c:'#E8407A'});
+      pixels.push({x:12, y:10, c:'#E8407A'});
+
+      // seal — #F59E0B
+      pixels.push({x:7, y:13, c:'#F59E0B'});
+      pixels.push({x:8, y:13, c:'#F59E0B'});
+      pixels.push({x:6, y:14, c:'#F59E0B'});
+      pixels.push({x:7, y:14, c:'#F59E0B'});
+      pixels.push({x:8, y:14, c:'#F59E0B'});
+      pixels.push({x:9, y:14, c:'#F59E0B'});
+
+      pixels.forEach(function(p) {
+        var div = document.createElement('div');
+        div.className = 'margot-pixel';
+        div.style.left = (p.x * 4) + 'px';
+        div.style.top  = (p.y * 4) + 'px';
+        div.style.background = p.c;
+        container.appendChild(div);
+      });
+    }
+    drawMargot('margot-hero');
   </script>
 </body>
 </html>
