@@ -95,21 +95,24 @@
       font-weight: 600;
       font-size: 1rem;
       text-decoration: none;
-      border-radius: 50px;
+      border-radius: 4px;
       border: none;
       cursor: pointer;
-      transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 24px rgba(192, 38, 211, 0.35);
+      transition: opacity 0.2s, transform 0.2s;
+      box-shadow: 4px 4px 0 #4A1A8A;
       white-space: nowrap;
     }
 
     .btn-primary:hover {
       opacity: 0.92;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(192, 38, 211, 0.5);
+      transform: translate(-1px, -1px);
+      box-shadow: 5px 5px 0 #4A1A8A;
     }
 
-    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 #4A1A8A;
+    }
 
     .section {
       padding: 100px 24px;
@@ -184,9 +187,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(107, 33, 168, 0.18) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(249, 115, 22, 0.08) 0%, transparent 60%);
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(107, 33, 168, 0.18) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -1086,6 +1087,15 @@
       .price-card    { padding: 32px 24px; }
       .pricing-grid  { grid-template-columns: 1fr; gap: 20px; }
       .section       { padding: 72px 20px; }
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXVדל5eXlzc3OVlZWPj4+MjIyKioqJiYmGhoaFhYWDg4ODg4N/f39dXV1ZWVlXV1dRUVFPT09LS0tJSUlERETgJkRaAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBtIBEAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfhCwMQLiGptmBsAAAAHWlUWHRDb21tZW50AAAAAABDcmVhdGVkIHdpdGggR0lNUGQuZQcAAABnSURBVDjLY2BgYGBiYGBg5OTi4ubh5eMXEBQSFhEVE5eQlJKWkZWTV1BUUlZRVVPX0NTS1tHV0zcwNDI2MTUzt7C0sraxtbN3cHRydnF1c/fw9PL28fULCAwKDgkNCw+PiIyKBgAIkgRhxQKFZAAAAABJRU5ErkJggg==");
+      opacity: 0.035;
+      pointer-events: none;
+      z-index: 9999;
     }
   </style>
 </head>
