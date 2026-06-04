@@ -1089,11 +1089,12 @@
       .section       { padding: 72px 20px; }
     }
     @keyframes margot-land {
-      0%   { transform: translateY(-220px); opacity: 0; }
-      60%  { transform: translateY(8px);    opacity: 1; }
-      75%  { transform: translateY(-6px); }
-      85%  { transform: translateY(4px); }
-      92%  { transform: translateY(-2px); }
+      0%   { transform: translateY(-600px); opacity: 0; }
+      20%  { opacity: 1; }
+      70%  { transform: translateY(8px); }
+      82%  { transform: translateY(-6px); }
+      90%  { transform: translateY(4px); }
+      95%  { transform: translateY(-2px); }
       100% { transform: translateY(0px); }
     }
     @keyframes margot-squash {
@@ -1765,15 +1766,15 @@
       setTimeout(function() {
         hero.style.transition = 'none';
         hero.style.opacity = '1';
-        hero.style.animation = 'margot-land 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards';
+        hero.style.animation = 'margot-land 1.4s cubic-bezier(0.15, 0.6, 0.35, 1) forwards';
         setTimeout(function() {
-          hero.style.animation = 'margot-land 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards, margot-squash 0.35s ease-out forwards';
-        }, 450);
+          hero.style.animation = 'margot-land 1.4s cubic-bezier(0.15, 0.6, 0.35, 1) forwards, margot-squash 0.4s ease-out forwards';
+        }, 980);
         setTimeout(function() {
           hero.style.animation = 'margot-float 3s ease-in-out infinite';
           startTypewriter();
-        }, 800);
-      }, 150);
+        }, 1550);
+      }, 300);
     })();
     drawMargot('margot-intro-sprite', 6);
     drawMargot('evo-sprite-0', 6, 'dormant');
