@@ -263,7 +263,7 @@
        MARGOT INTRO (combined section)
     ════════════════════════════════ */
     #margot-intro {
-      padding: 100px 24px 112px;
+      padding: 80px 24px;
     }
 
     .margot-intro-inner {
@@ -404,12 +404,16 @@
     ════════════════════════════════ */
     .tg-mockup {
       width: 100%;
-      max-width: 380px;
+      max-width: 400px;
       margin: 0 auto;
       border-radius: 14px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.08);
       box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+      height: 520px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
     }
 
     .tg-header {
@@ -450,11 +454,76 @@
 
     .tg-header-dots { color: #8A8A9A; }
 
+    .tg-tabs {
+      display: flex;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tg-tabs::-webkit-scrollbar { display: none; }
+
+    .tg-tab {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #555;
+      padding: 10px 20px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      position: relative;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: color 0.2s;
+    }
+
+    .tg-tab.active { color: #9B50D8; }
+
+    .tg-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(to right, #6B21A8, #C026D3, #F97316);
+    }
+
+    .tg-photo {
+      width: 200px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .tg-replay {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(83,74,183,0.15);
+      border: 1px solid rgba(83,74,183,0.4);
+      border-radius: 20px;
+      padding: 5px 12px;
+      color: #A78BFA;
+      font-size: 12px;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: background 0.2s;
+      z-index: 2;
+    }
+
+    .tg-replay:hover { background: rgba(83,74,183,0.3); }
+
     .tg-body {
       background: #0C0A14;
       padding: 12px 16px;
-      min-height: 400px;
-      max-height: 480px;
+      flex: 1;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
@@ -774,7 +843,7 @@
     }
 
     @media (max-width: 480px) {
-      #margot-intro  { padding: 72px 20px 80px; }
+      #margot-intro  { padding: 56px 16px; }
       .btn-primary   { padding: 14px 24px; font-size: 0.95rem; }
       .price-card    { padding: 32px 24px; }
       .pricing-grid  { grid-template-columns: 1fr; gap: 20px; }
@@ -838,6 +907,12 @@
         ✦ MEET MARGOT ✦
       </div>
 
+      <div class="tg-tabs" role="tablist">
+        <button class="tg-tab active" data-tab="0" role="tab">Keep for someone</button>
+        <button class="tg-tab" data-tab="1" role="tab">Keep for yourself</button>
+        <button class="tg-tab" data-tab="2" role="tab">Opening a surprise</button>
+      </div>
+
       <div class="tg-mockup">
         <div class="tg-header">
           <div class="tg-header-avatar">K</div>
@@ -852,6 +927,7 @@
           </div>
         </div>
         <div class="tg-body" id="tg-chat-body"></div>
+        <button class="tg-replay" id="tg-replay" style="display:none">↺ Replay</button>
       </div>
 
     </div>
@@ -1013,10 +1089,31 @@
     var CHAT_SPEED   = 46;  // ms per character
     var CHAT_PAUSE   = 520; // ms pause after each line before next starts
 
-    // ── Telegram chat mockup ─────────────────────────────────────────
-    async function runTgChat() {
+    // ── Tabbed Telegram mockup ───────────────────────────────────────
+    var TG_PHOTO = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wAARCADwAUADASIAAhEBAxEB/8QAGwABAAMBAQEBAAAAAAAAAAAAAAECAwQFBgf/xAA4EAACAQMCBAQEBAYCAwAAAAAAAQIDEQQhMRJBUWFxgZGhBRMiscHRM0LwFBUjUmLh8SRDU4L/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A+ugAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/9k=';
+
+    var tgToken = null;
+    function tgCancel() { if (tgToken) tgToken.dead = true; tgToken = null; }
+
+    async function tgRun(tabIndex) {
+      tgCancel();
+      var tok = {dead: false};
+      tgToken = tok;
+
       var body = document.getElementById('tg-chat-body');
+      var replay = document.getElementById('tg-replay');
       if (!body) return;
+      body.innerHTML = '';
+      if (replay) replay.style.display = 'none';
+
+      function gone() { return tok.dead; }
+
+      async function wait(ms) {
+        if (gone()) throw 0;
+        return new Promise(function(res, rej) {
+          setTimeout(function() { gone() ? rej(0) : res(); }, ms);
+        });
+      }
 
       function esc(s) {
         return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
@@ -1029,16 +1126,16 @@
         d.innerHTML = '<span class="tg-dot"></span><span class="tg-dot"></span><span class="tg-dot"></span>';
         body.appendChild(d);
         body.scrollTop = body.scrollHeight;
-        await delay(800);
-        body.removeChild(d);
+        await wait(700);
+        if (!gone()) body.removeChild(d);
       }
 
       async function fadeIn(el) {
-        await delay(30);
+        await wait(30);
         el.classList.add('visible');
-        await delay(60);
+        await wait(60);
         body.scrollTop = body.scrollHeight;
-        await delay(400);
+        await wait(380);
       }
 
       async function botMsg(text, time) {
@@ -1050,7 +1147,7 @@
         await fadeIn(el);
       }
 
-      async function botKbd(text, buttons, time) {
+      async function botKbd(text, buttons, tapLabel, time) {
         await typing();
         var wrap = document.createElement('div');
         wrap.className = 'tg-msg-group';
@@ -1069,7 +1166,21 @@
         wrap.appendChild(kbd);
         body.appendChild(wrap);
         await fadeIn(wrap);
-        return kbd;
+        if (tapLabel) {
+          await wait(700);
+          var target = null;
+          kbd.querySelectorAll('.tg-kbd-btn').forEach(function(b) {
+            if (b.textContent === tapLabel) target = b;
+          });
+          if (target && !gone()) {
+            target.classList.add('active');
+            await wait(350);
+            if (!gone()) target.classList.remove('active');
+            await wait(120);
+          }
+        } else {
+          await wait(500);
+        }
       }
 
       async function userMsg(text, time) {
@@ -1080,73 +1191,76 @@
         await fadeIn(el);
       }
 
-      async function userPhoto() {
+      async function photoMsg(side) {
         var el = document.createElement('div');
-        el.className = 'tg-msg tg-msg-user';
-        el.innerHTML = '<div class="tg-msg-photo">' +
-          '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
-          '<rect x="3" y="3" width="18" height="18" rx="2"/>' +
-          '<circle cx="8.5" cy="8.5" r="1.5"/>' +
-          '<polyline points="21 15 16 10 5 21"/>' +
-          '</svg>' +
-          '<span class="tg-msg-time" style="position:absolute;bottom:6px;right:8px">9:42</span>' +
-          '</div>';
+        el.className = 'tg-msg tg-msg-' + side;
+        var align = side === 'user' ? ' style="margin-left:auto"' : '';
+        el.innerHTML = '<img src="' + TG_PHOTO + '" class="tg-photo"' + align + ' alt="">';
         body.appendChild(el);
         await fadeIn(el);
       }
 
-      async function tapBtn(kbd, label) {
-        var target = null;
-        kbd.querySelectorAll('.tg-kbd-btn').forEach(function(b) {
-          if (b.textContent === label) target = b;
-        });
-        if (!target) return;
-        target.classList.add('active');
-        await delay(360);
-        target.classList.remove('active');
-        await delay(120);
-      }
-
-      while (true) {
-        body.innerHTML = '';
-
-        await botMsg('Oh, you found me. Good. 💅');
-        await botMsg('I keep things safe until the moment is right.');
-        await userMsg('/keep', '9:41');
-
-        var kbd4 = await botKbd('Who is this for?', ['For myself', 'For Jane'], '9:41');
-        await delay(800);
-        await tapBtn(kbd4, 'For Jane');
-        await userMsg('For Jane', '9:41');
-
-        await botMsg('What do you want to leave for Jane?\nText, photo, audio, video or a sticker.', '9:41');
-        await userPhoto();
-
-        var kbd8 = await botKbd('Good choice. When should Jane find this?', ['Tomorrow morning', 'Choose a date'], '9:42');
-        await delay(800);
-        await tapBtn(kbd8, 'Tomorrow morning');
-        await userMsg('Tomorrow morning', '9:42');
-
-        await botMsg('Kept. 🔒\nJane will find this tomorrow at 9:00 AM. I won’t say a word.', '9:42');
-
-        await delay(2200);
-        body.scrollTo({top: 0, behavior: 'smooth'});
-        await delay(1000);
-      }
+      try {
+        if (tabIndex === 0) {
+          await botMsg("Oh, you found me. Good. 💅");
+          await botMsg("I keep things safe until the moment is right.");
+          await userMsg('/keep', '9:41');
+          await botKbd("Who is this for?", ['For myself', 'For Jane'], 'For Jane', '9:41');
+          await userMsg('For Jane', '9:41');
+          await botMsg("What do you want to leave for Jane?\nText, photo, audio, video or a sticker.", '9:41');
+          await photoMsg('user');
+          await botKbd("Good choice. When should Jane find this?", ['Tomorrow morning', 'Choose a date'], 'Tomorrow morning', '9:42');
+          await userMsg('Tomorrow morning', '9:42');
+          await botMsg("Kept. 🔒\nJane will find this tomorrow at 9:00 AM.\nI won’t say a word.", '9:42');
+        } else if (tabIndex === 1) {
+          await userMsg('/keep', '9:41');
+          await botKbd("Who is this for?", ['For myself', 'For Jane'], 'For myself', '9:41');
+          await userMsg('For myself', '9:41');
+          await botMsg("What do you want to leave for yourself?\nText, photo, audio, video or a sticker.", '9:41');
+          await userMsg("A note to my future self 📝", '9:41');
+          await botKbd("When should you find this?", ['In 3 months', 'Choose a date'], 'In 3 months', '9:41');
+          await userMsg('In 3 months', '9:41');
+          await botMsg("Kept. 🔒\nYou’ll find this on August 26 at 9:00 AM.\nI won’t say a word. Not even to you.", '9:42');
+        } else {
+          await botMsg("Something is waiting for you. 💌");
+          await botKbd("Jane left this for you.", ['Open it'], 'Open it', '9:41');
+          await userMsg('Open it', '9:41');
+          await botMsg("She kept this for you since May 20.", '9:41');
+          await photoMsg('bot');
+          await botKbd("It’s yours now. 💌", ['React'], null, '9:42');
+          await userMsg("This is beautiful 🥺❤️", '9:42');
+          await botMsg("Sent. Jane will know it landed well. ✨", '9:42');
+        }
+        if (!gone() && replay) replay.style.display = '';
+      } catch(e) { /* cancelled */ }
     }
 
+    var tgActiveTab = 0;
+
+    document.querySelectorAll('.tg-tab').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var idx = parseInt(btn.getAttribute('data-tab'), 10);
+        document.querySelectorAll('.tg-tab').forEach(function(t) { t.classList.remove('active'); });
+        btn.classList.add('active');
+        tgActiveTab = idx;
+        tgRun(idx);
+      });
+    });
+
+    var tgReplayEl = document.getElementById('tg-replay');
+    if (tgReplayEl) tgReplayEl.addEventListener('click', function() { tgRun(tgActiveTab); });
+
     var tgFired = false;
+    var tgSection = document.getElementById('margot-intro');
     var tgObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
         if (e.isIntersecting && !tgFired) {
           tgFired = true;
-          runTgChat();
+          tgRun(0);
           tgObs.unobserve(e.target);
         }
       });
     }, {threshold: 0.15});
-
-    var tgSection = document.getElementById('margot-intro');
     if (tgSection) tgObs.observe(tgSection);
 
     // ── Margot hero sprite ──────────────────────────────────────────
