@@ -257,6 +257,107 @@
       50%       { transform: translateX(-50%) translateY(9px); }
     }
 
+    /* HERO ENHANCEMENT 1: floating pixels */
+    .hero-deco {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.6;
+      z-index: 2;
+    }
+    .hero-deco-star {
+      width: 3px; height: 3px;
+      background: #F59E0B;
+      /* plus/star: div=left of middle row; shadows fill cross */
+      box-shadow: 3px -3px 0 0 #F59E0B, 3px 0 0 0 #F59E0B, 6px 0 0 0 #F59E0B, 3px 3px 0 0 #F59E0B;
+    }
+    .hero-deco-heart {
+      width: 3px; height: 3px;
+      background: #E8407A;
+      /* 3×3 heart: two bumps top, V-shape */
+      box-shadow: 6px 0 0 0 #E8407A, 0 3px 0 0 #E8407A, 3px 3px 0 0 #E8407A, 6px 3px 0 0 #E8407A, 3px 6px 0 0 #E8407A;
+    }
+    .hero-deco-lock {
+      width: 3px; height: 3px;
+      background: #9B50D8;
+      /* 3×4 lock: shackle top + body + keyhole */
+      box-shadow: -3px 3px 0 0 #9B50D8, 3px 3px 0 0 #9B50D8, -3px 6px 0 0 #9B50D8, 0 6px 0 0 #9B50D8, 3px 6px 0 0 #9B50D8, -3px 9px 0 0 #9B50D8, 3px 9px 0 0 #9B50D8;
+    }
+    .hero-deco-sparkle {
+      width: 4px; height: 4px;
+      background: #FFFFFF;
+    }
+    @keyframes float-a {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      50%      { transform: translateY(-12px) rotate(5deg); }
+    }
+    /* END HERO ENHANCEMENT 1 */
+
+    /* HERO ENHANCEMENT 2: Margot reaction after typewriter */
+    @keyframes margot-bounce-once {
+      0%   { transform: translateY(0) scale(1); }
+      50%  { transform: translateY(-3px) scale(1.12); }
+      100% { transform: translateY(0) scale(1); }
+    }
+    .margot-bounce {
+      animation: margot-bounce-once 0.4s ease-out forwards !important;
+    }
+    @keyframes hero-heart-pop {
+      0%   { opacity: 1; transform: translateX(-50%) scale(0); }
+      20%  { opacity: 1; transform: translateX(-50%) scale(1); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(-20px) scale(1); }
+    }
+    /* END HERO ENHANCEMENT 2 */
+
+    /* HERO ENHANCEMENT 3: breathing glow behind Margot */
+    #hero-glow {
+      position: absolute;
+      width: 200px; height: 200px;
+      left: calc(50% - 100px);
+      top: -52px; /* centers 200px glow behind 96px sprite: (96/2) - (200/2) = -52 */
+      background: radial-gradient(circle, rgba(139,92,246,0.25) 0%, rgba(245,158,11,0.1) 40%, transparent 70%);
+      border-radius: 50%;
+      animation: breathe 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes breathe {
+      0%,100% { transform: scale(1);    opacity: 0.6; }
+      50%      { transform: scale(1.15); opacity: 0.9; }
+    }
+    /* END HERO ENHANCEMENT 3 */
+
+    /* HERO ENHANCEMENT 4: pixel art divider */
+    .pixel-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px 0;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .px-env {
+      width: 2px; height: 2px;
+      background: var(--ec);
+      /* 5×4 pixel envelope: top bar, V-flap, sides, bottom bar */
+      box-shadow:
+        2px 0 0 0 var(--ec), 4px 0 0 0 var(--ec), 6px 0 0 0 var(--ec), 8px 0 0 0 var(--ec),
+        0 2px 0 0 var(--ec), 4px 2px 0 0 var(--ec), 8px 2px 0 0 var(--ec),
+        0 4px 0 0 var(--ec), 8px 4px 0 0 var(--ec),
+        0 6px 0 0 var(--ec), 2px 6px 0 0 var(--ec), 4px 6px 0 0 var(--ec), 6px 6px 0 0 var(--ec), 8px 6px 0 0 var(--ec);
+      opacity: 0.3;
+      flex-shrink: 0;
+    }
+    .px-env-center {
+      width: 3px; height: 3px;
+      box-shadow:
+        3px 0 0 0 var(--ec), 6px 0 0 0 var(--ec), 9px 0 0 0 var(--ec), 12px 0 0 0 var(--ec),
+        0 3px 0 0 var(--ec), 6px 3px 0 0 var(--ec), 12px 3px 0 0 var(--ec),
+        0 6px 0 0 var(--ec), 12px 6px 0 0 var(--ec),
+        0 9px 0 0 var(--ec), 3px 9px 0 0 var(--ec), 6px 9px 0 0 var(--ec), 9px 9px 0 0 var(--ec), 12px 9px 0 0 var(--ec);
+      opacity: 0.9;
+    }
+    /* END HERO ENHANCEMENT 4 */
+
     /* ════════════════════════════════
        MARGOT INTRO (combined section)
     ════════════════════════════════ */
@@ -888,6 +989,9 @@
   <!-- ════════════════ HERO ════════════════ -->
   <section id="hero">
     <div style="position:relative;z-index:1;display:block;text-align:center">
+      <!-- HERO ENHANCEMENT 3: breathing glow (first in DOM = renders behind sprite) -->
+      <div id="hero-glow" aria-hidden="true"></div>
+      <!-- END HERO ENHANCEMENT 3 -->
       <div class="margot-sprite" id="margot-hero">
       </div>
       <div class="pixel-label" style="margin-bottom:16px;">
@@ -908,6 +1012,13 @@
       </div>
     </div>
 
+    <!-- HERO ENHANCEMENT 1: floating pixel decorations -->
+    <div class="hero-deco hero-deco-star"    aria-hidden="true" style="left:calc(50% - 100px);top:calc(33% - 15px);animation:float-a 4s   ease-in-out infinite;animation-delay:-0.5s;"></div>
+    <div class="hero-deco hero-deco-heart"   aria-hidden="true" style="left:calc(50% + 70px); top:calc(33% - 10px);animation:float-a 5s   ease-in-out infinite;animation-delay:-1.8s;animation-direction:alternate-reverse;"></div>
+    <div class="hero-deco hero-deco-lock"    aria-hidden="true" style="left:calc(50% - 148px);top:calc(33% + 58px);animation:float-a 6s   ease-in-out infinite;animation-delay:-2.5s;"></div>
+    <div class="hero-deco hero-deco-sparkle" aria-hidden="true" style="left:calc(50% + 100px);top:calc(33% + 48px);animation:float-a 3.5s ease-in-out infinite;animation-delay:-1s;"></div>
+    <!-- END HERO ENHANCEMENT 1 -->
+
     <div id="scroll-indicator" aria-hidden="true">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="6 9 12 15 18 9"/>
@@ -915,7 +1026,19 @@
     </div>
   </section>
 
-  <hr class="grad-divider" style="max-width:1100px;margin:0 auto;opacity:0.25"/>
+  <!-- HERO ENHANCEMENT 4: pixel art divider (replaces plain hr) -->
+  <div class="pixel-divider" aria-hidden="true">
+    <div class="px-env" style="--ec:#6B21A8"></div>
+    <div class="px-env" style="--ec:#7D2B96"></div>
+    <div class="px-env" style="--ec:#8E3583"></div>
+    <div class="px-env" style="--ec:#A04071"></div>
+    <div class="px-env px-env-center" style="--ec:#B24A5F"></div>
+    <div class="px-env" style="--ec:#C4544C"></div>
+    <div class="px-env" style="--ec:#D65F3A"></div>
+    <div class="px-env" style="--ec:#E76928"></div>
+    <div class="px-env" style="--ec:#F97316"></div>
+  </div>
+  <!-- END HERO ENHANCEMENT 4 -->
 
   <!-- ════════════════ MARGOT INTRO ════════════════ -->
   <section id="margot-intro">
@@ -1084,6 +1207,31 @@
       });
     }
 
+    // HERO ENHANCEMENT 2: Margot reaction triggered after typewriter
+    function triggerMargotReact() {
+      var sprite   = document.getElementById('margot-hero');
+      var innerDiv = sprite && sprite.parentElement;
+      if (!sprite || !innerDiv) return;
+
+      // Bounce: briefly override float animation
+      sprite.classList.add('margot-bounce');
+      setTimeout(function() { sprite.classList.remove('margot-bounce'); }, 460);
+
+      // Heart: pixel-art heart pops above sprite and floats up
+      var heart = document.createElement('div');
+      heart.setAttribute('aria-hidden', 'true');
+      heart.style.cssText = [
+        'position:absolute', 'left:50%', 'top:-4px',
+        'width:3px', 'height:3px', 'background:#E8407A',
+        'box-shadow:6px 0 0 0 #E8407A,0 3px 0 0 #E8407A,3px 3px 0 0 #E8407A,6px 3px 0 0 #E8407A,3px 6px 0 0 #E8407A',
+        'pointer-events:none', 'z-index:10',
+        'animation:hero-heart-pop 1.2s ease-out forwards'
+      ].join(';');
+      innerDiv.appendChild(heart);
+      setTimeout(function() { if (heart.parentNode) heart.parentNode.removeChild(heart); }, 1300);
+    }
+    // END HERO ENHANCEMENT 2
+
     // ── Hero typewriter (62ms/char — 20% slower than original 52ms) ──
     (async function heroTypewriter() {
       await delay(500);
@@ -1112,6 +1260,9 @@
         }
         setTimeout(tick, SPEED);
       });
+
+      // HERO ENHANCEMENT 2: trigger reaction 300ms after typewriter finishes
+      setTimeout(triggerMargotReact, 300);
 
       await delay(250);
       after.style.opacity = '1';
