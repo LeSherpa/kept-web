@@ -1262,31 +1262,31 @@
           <div class="evo-connector" aria-hidden="true"></div>
 
           <div class="evo-card" style="--glow-color:rgba(144,144,144,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-0" style="filter:grayscale(1) brightness(0.6);"></div>
+            <div class="evo-sprite-wrap" id="evo-sprite-0"></div>
             <div class="evo-stage-num pixel-label" style="color:#555566;">01</div>
             <div class="evo-name">DORMANT</div>
           </div>
 
           <div class="evo-card" style="--glow-color:rgba(139,91,168,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-1" style="filter:hue-rotate(330deg) saturate(0.8) brightness(0.9);"></div>
+            <div class="evo-sprite-wrap" id="evo-sprite-1"></div>
             <div class="evo-stage-num pixel-label" style="color:#9B50D8;">02</div>
             <div class="evo-name">AWAKENED</div>
           </div>
 
           <div class="evo-card" style="--glow-color:rgba(123,47,158,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-2" style="filter:saturate(2) brightness(1.0);"></div>
+            <div class="evo-sprite-wrap" id="evo-sprite-2"></div>
             <div class="evo-stage-num pixel-label" style="color:#C026D3;">03</div>
             <div class="evo-name">GROWING</div>
           </div>
 
           <div class="evo-card" style="--glow-color:rgba(201,112,48,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-3" style="filter:hue-rotate(150deg) saturate(2.5) brightness(1.1);"></div>
+            <div class="evo-sprite-wrap" id="evo-sprite-3"></div>
             <div class="evo-stage-num pixel-label" style="color:#E8407A;">04</div>
             <div class="evo-name">FLOURISHING</div>
           </div>
 
           <div class="evo-card" style="--glow-color:rgba(245,168,0,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-4" style="filter:hue-rotate(160deg) saturate(3.5) brightness(1.2);"></div>
+            <div class="evo-sprite-wrap" id="evo-sprite-4"></div>
             <div class="evo-stage-num pixel-label" style="color:#F59E0B;">05</div>
             <div class="evo-name">LEGENDARY</div>
           </div>
@@ -1670,49 +1670,58 @@
     [0, 1, 2].forEach(function(idx) { tgShowPlay(idx); });
 
     // ── Margot hero sprite ──────────────────────────────────────────
-    function drawMargot(containerId, px) {
+    function drawMargot(containerId, px, stage) {
       var container = document.getElementById(containerId);
       if (!container) return;
       px = px || 4;
+      stage = stage || 'awakened';
+      var stageColors = {
+        dormant:     { body: '#2A2A2A', outline: '#1A1A1A', flap: '#333333', eyes: '#555555', blush: '#444444', seal: '#444444' },
+        awakened:    { body: '#7B2FBE', outline: '#4A1A8A', flap: '#9B50D8', eyes: '#FFFFFF', blush: '#E8407A', seal: '#F59E0B' },
+        growing:     { body: '#7B2FBE', outline: '#4A1A8A', flap: '#9B50D8', eyes: '#FFFFFF', blush: '#C026D3', seal: '#C026D3' },
+        flourishing: { body: '#7B2FBE', outline: '#4A1A8A', flap: '#9B50D8', eyes: '#FFE0B0', blush: '#F97316', seal: '#F97316' },
+        legendary:   { body: '#7B2FBE', outline: '#4A1A8A', flap: '#9B50D8', eyes: '#FFF5CC', blush: '#F5A800', seal: '#F5A800' }
+      };
+      var c = stageColors[stage] || stageColors.awakened;
       var pixels = [];
 
-      // outline — #4A1A8A
-      for (var x = 2; x <= 13; x++) pixels.push({x:x, y:0,  c:'#4A1A8A'});
-      pixels.push({x:1,  y:1,  c:'#4A1A8A'});
-      pixels.push({x:14, y:1,  c:'#4A1A8A'});
-      for (var x = 1; x <= 14; x++) pixels.push({x:x, y:15, c:'#4A1A8A'});
+      // outline
+      for (var x = 2; x <= 13; x++) pixels.push({x:x, y:0,  c:c.outline});
+      pixels.push({x:1,  y:1,  c:c.outline});
+      pixels.push({x:14, y:1,  c:c.outline});
+      for (var x = 1; x <= 14; x++) pixels.push({x:x, y:15, c:c.outline});
 
-      // body — #7B2FBE
+      // body
       for (var y = 2; y <= 14; y++) {
-        for (var x = 2; x <= 13; x++) pixels.push({x:x, y:y, c:'#7B2FBE'});
+        for (var x = 2; x <= 13; x++) pixels.push({x:x, y:y, c:c.body});
       }
 
-      // flap — #9B50D8
-      for (var x = 2;  x <= 13; x++) pixels.push({x:x, y:2, c:'#9B50D8'});
-      for (var x = 3;  x <= 12; x++) pixels.push({x:x, y:3, c:'#9B50D8'});
-      for (var x = 4;  x <= 11; x++) pixels.push({x:x, y:4, c:'#9B50D8'});
-      for (var x = 5;  x <= 10; x++) pixels.push({x:x, y:5, c:'#9B50D8'});
-      for (var x = 6;  x <= 9;  x++) pixels.push({x:x, y:6, c:'#9B50D8'});
-      pixels.push({x:7, y:7, c:'#9B50D8'});
-      pixels.push({x:8, y:7, c:'#9B50D8'});
+      // flap
+      for (var x = 2;  x <= 13; x++) pixels.push({x:x, y:2, c:c.flap});
+      for (var x = 3;  x <= 12; x++) pixels.push({x:x, y:3, c:c.flap});
+      for (var x = 4;  x <= 11; x++) pixels.push({x:x, y:4, c:c.flap});
+      for (var x = 5;  x <= 10; x++) pixels.push({x:x, y:5, c:c.flap});
+      for (var x = 6;  x <= 9;  x++) pixels.push({x:x, y:6, c:c.flap});
+      pixels.push({x:7, y:7, c:c.flap});
+      pixels.push({x:8, y:7, c:c.flap});
 
-      // eyes — #FFFFFF
-      pixels.push({x:4,  y:9, c:'#FFFFFF'});
-      pixels.push({x:5,  y:9, c:'#FFFFFF'});
-      pixels.push({x:10, y:9, c:'#FFFFFF'});
-      pixels.push({x:11, y:9, c:'#FFFFFF'});
+      // eyes
+      pixels.push({x:4,  y:9, c:c.eyes});
+      pixels.push({x:5,  y:9, c:c.eyes});
+      pixels.push({x:10, y:9, c:c.eyes});
+      pixels.push({x:11, y:9, c:c.eyes});
 
-      // blush — #E8407A
-      pixels.push({x:3,  y:10, c:'#E8407A'});
-      pixels.push({x:12, y:10, c:'#E8407A'});
+      // blush
+      pixels.push({x:3,  y:10, c:c.blush});
+      pixels.push({x:12, y:10, c:c.blush});
 
-      // seal — #F59E0B
-      pixels.push({x:7, y:13, c:'#F59E0B'});
-      pixels.push({x:8, y:13, c:'#F59E0B'});
-      pixels.push({x:6, y:14, c:'#F59E0B'});
-      pixels.push({x:7, y:14, c:'#F59E0B'});
-      pixels.push({x:8, y:14, c:'#F59E0B'});
-      pixels.push({x:9, y:14, c:'#F59E0B'});
+      // seal
+      pixels.push({x:7, y:13, c:c.seal});
+      pixels.push({x:8, y:13, c:c.seal});
+      pixels.push({x:6, y:14, c:c.seal});
+      pixels.push({x:7, y:14, c:c.seal});
+      pixels.push({x:8, y:14, c:c.seal});
+      pixels.push({x:9, y:14, c:c.seal});
 
       pixels.forEach(function(p) {
         var div = document.createElement('div');
@@ -1727,11 +1736,11 @@
     }
     drawMargot('margot-hero', 6);
     drawMargot('margot-intro-sprite', 6);
-    drawMargot('evo-sprite-0', 6);
-    drawMargot('evo-sprite-1', 6);
-    drawMargot('evo-sprite-2', 6);
-    drawMargot('evo-sprite-3', 6);
-    drawMargot('evo-sprite-4', 6);
+    drawMargot('evo-sprite-0', 6, 'dormant');
+    drawMargot('evo-sprite-1', 6, 'awakened');
+    drawMargot('evo-sprite-2', 6, 'growing');
+    drawMargot('evo-sprite-3', 6, 'flourishing');
+    drawMargot('evo-sprite-4', 6, 'legendary');
 
     // evo-card hover interactions
     document.querySelectorAll('.evo-card').forEach(function(card) {
