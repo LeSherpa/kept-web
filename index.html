@@ -840,19 +840,20 @@
     .evo-sprite-wrap::before {
       content: '';
       position: absolute;
-      inset: -20px;
+      inset: -10px;
       border-radius: 50%;
       background: radial-gradient(circle, var(--glow-color, rgba(123,47,190,0.45)) 0%, transparent 70%);
       opacity: 0;
       z-index: -1;
       transition: opacity 0.3s ease;
       pointer-events: none;
+      filter: blur(8px);
     }
     .evo-sprite-wrap.evo-hover {
       animation: margot-bounce-once 0.4s ease-out forwards !important;
     }
     .evo-sprite-wrap.evo-hover::before {
-      opacity: 1;
+      opacity: 0.6;
     }
     .evo-card:nth-child(2) .evo-sprite-wrap { animation-delay: 0s; }
     .evo-card:nth-child(3) .evo-sprite-wrap { animation-delay: 0.4s; }
@@ -1253,16 +1254,12 @@
       <div class="pixel-label" style="margin-bottom:16px;">THE FLAME</div>
       <h2 class="hero-headline reveal" style="text-align:center;">Keep the <span class="grad-text">flame</span> alive.</h2>
       <p class="hero-sub reveal" style="text-align:center;margin:16px auto 0;max-width:480px;">Margot grows with every keep. Tend her well.</p>
-      <div class="evo-invite-line reveal">
-        <span class="pixel-label">✦ INVITE SYSTEM ✦</span>
-        <p>Bring someone into your flame. Free users can invite up to 2 people. Plus users up to 5.</p>
-      </div>
       <div class="evo-scroll-wrap">
         <div class="evo-row reveal-children">
           <div class="evo-connector" aria-hidden="true"></div>
 
           <div class="evo-card" style="--glow-color:rgba(60,60,80,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-0" style="filter:grayscale(1) brightness(0.4);"></div>
+            <div class="evo-sprite-wrap" id="evo-sprite-0" style="filter:grayscale(1) brightness(0.35);"></div>
             <div class="evo-stage-num pixel-label" style="color:#555566;">01</div>
             <div class="evo-name">DORMANT</div>
           </div>
@@ -1274,19 +1271,19 @@
           </div>
 
           <div class="evo-card" style="--glow-color:rgba(192,38,211,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-2" style="filter:sepia(1) hue-rotate(260deg) saturate(2.5) brightness(1.1);"></div>
+            <div class="evo-sprite-wrap" id="evo-sprite-2" style="filter:saturate(1.8) brightness(1.05);"></div>
             <div class="evo-stage-num pixel-label" style="color:#C026D3;">03</div>
             <div class="evo-name">GROWING</div>
           </div>
 
           <div class="evo-card" style="--glow-color:rgba(232,64,122,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-3" style="filter:sepia(1) hue-rotate(300deg) saturate(3) brightness(1.1);"></div>
+            <div class="evo-sprite-wrap" id="evo-sprite-3" style="filter:sepia(0.5) hue-rotate(310deg) saturate(2.5) brightness(1.1);"></div>
             <div class="evo-stage-num pixel-label" style="color:#E8407A;">04</div>
             <div class="evo-name">FLOURISHING</div>
           </div>
 
           <div class="evo-card" style="--glow-color:rgba(245,158,11,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-4" style="filter:sepia(1) saturate(4) brightness(1.15);"></div>
+            <div class="evo-sprite-wrap" id="evo-sprite-4" style="filter:sepia(1) saturate(3.5) brightness(1.1);"></div>
             <div class="evo-stage-num pixel-label" style="color:#F59E0B;">05</div>
             <div class="evo-name">LEGENDARY</div>
           </div>
@@ -1323,7 +1320,7 @@
             <li>Unlimited text surprises</li>
             <li>Schedule up to 3 months</li>
             <li>Surprise notifications</li>
-            <li>Up to 2 invitees</li>
+            <li>Up to 2 relationships</li>
           </ul>
         </div>
 
@@ -1336,7 +1333,7 @@
           <ul class="price-features">
             <li>Everything in Free</li>
             <li>Unlimited scheduling</li>
-            <li>Up to 5 invitees</li>
+            <li>Up to 5 relationships</li>
             <li>Photos, audio, video &amp; stickers</li>
           </ul>
           <a href="https://t.me/getkeptbot" class="btn-primary" target="_blank" rel="noopener" style="justify-content:center">
@@ -1751,7 +1748,7 @@
       card.addEventListener('mouseleave', function() {
         if (idx === 0) {
           wrap.style.transition = 'filter 0.6s ease';
-          wrap.style.filter = 'grayscale(1) brightness(0.4)';
+          wrap.style.filter = 'grayscale(1) brightness(0.35)';
         }
       });
     });
