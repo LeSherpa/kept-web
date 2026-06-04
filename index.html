@@ -788,8 +788,8 @@
     #evolution {
       padding: 60px 24px;
     }
-    #evolution .hero-headline { text-align: center; margin: 0 auto 8px; }
-    #evolution .hero-sub      { text-align: center; margin-top: 0; margin-bottom: 0; }
+    #evolution .hero-headline { text-align: center; margin: 0 auto 4px; }
+    #evolution .hero-sub      { text-align: center; margin-top: 4px; margin-bottom: 0; }
     .evo-scroll-wrap {
       overflow-x: auto;
       width: 100%;
@@ -805,7 +805,7 @@
       align-items: flex-start;
       width: 100%;
       max-width: 900px;
-      margin: 24px auto 0;
+      margin: 40px auto 0;
       position: relative;
     }
     .evo-card {
@@ -1320,7 +1320,7 @@
             <li>Unlimited text surprises</li>
             <li>Schedule up to 3 months</li>
             <li>Surprise notifications</li>
-            <li>Up to 2 relationships</li>
+            <li>Up to 2 invitees</li>
           </ul>
         </div>
 
@@ -1333,7 +1333,7 @@
           <ul class="price-features">
             <li>Everything in Free</li>
             <li>Unlimited scheduling</li>
-            <li>Up to 5 relationships</li>
+            <li>Up to 5 invitees</li>
             <li>Photos, audio, video &amp; stickers</li>
           </ul>
           <a href="https://t.me/getkeptbot" class="btn-primary" target="_blank" rel="noopener" style="justify-content:center">
@@ -1742,7 +1742,7 @@
         });
         if (idx === 0) {
           wrap.style.transition = 'filter 0.3s ease';
-          wrap.style.filter = 'none';
+          wrap.style.filter = 'grayscale(0.3) brightness(0.75)';
         }
       });
       card.addEventListener('mouseleave', function() {
