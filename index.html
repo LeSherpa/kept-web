@@ -50,16 +50,14 @@
 
     .margot-sprite {
       position: relative;
-      width: 64px;
-      height: 64px;
+      width: 96px;
+      height: 96px;
       margin: 0 auto 8px;
       animation: margot-float 3s ease-in-out infinite;
     }
 
     .margot-pixel {
       position: absolute;
-      width: 4px;
-      height: 4px;
     }
 
     @keyframes margot-float {
@@ -512,11 +510,12 @@
     .tg-header-dots { color: #8A8A9A; }
 
     .tg-photo {
-      width: 200px;
-      height: 150px;
+      width: 180px;
+      height: 240px;
       object-fit: cover;
       border-radius: 8px;
       display: block;
+      margin-left: auto;
     }
 
     .tg-replay {
@@ -923,12 +922,15 @@
     <div class="margot-intro-inner">
 
       <div class="margot-sprite" id="margot-intro-sprite"
-           style="width:48px;height:48px;margin:0 auto 16px;">
+           style="width:80px;height:80px;margin:0 auto 16px;">
       </div>
 
-      <div class="pixel-label" style="text-align:center;margin-bottom:60px;">
-        ✦ MEET MARGOT ✦
+      <div class="pixel-label" style="text-align:center;">
+        ✦ MARGOT ✦
       </div>
+      <p style="font-family:'Inter',sans-serif;font-size:16px;color:#9B94B0;font-weight:300;max-width:480px;text-align:center;margin:12px auto 48px;">
+        Your AI companion. She keeps your surprises safe, delivers them at the right moment, and grows with your relationship over time.
+      </p>
 
       <div class="tg-mockups-row">
 
@@ -1258,8 +1260,7 @@
       async function photoMsg(side) {
         var el = document.createElement('div');
         el.className = 'tg-msg tg-msg-' + side;
-        var align = side === 'user' ? ' style="margin-left:auto"' : '';
-        el.innerHTML = '<img src="' + TG_PHOTO + '" class="tg-photo"' + align + ' alt="">';
+        el.innerHTML = '<img src="' + TG_PHOTO + '" class="tg-photo" alt="">';
         body.appendChild(el);
         await fadeIn(el);
       }
@@ -1335,9 +1336,10 @@
     [0, 1, 2].forEach(function(idx) { tgShowPlay(idx); });
 
     // ── Margot hero sprite ──────────────────────────────────────────
-    function drawMargot(containerId) {
+    function drawMargot(containerId, px) {
       var container = document.getElementById(containerId);
       if (!container) return;
+      px = px || 4;
       var pixels = [];
 
       // outline — #4A1A8A
@@ -1381,14 +1383,16 @@
       pixels.forEach(function(p) {
         var div = document.createElement('div');
         div.className = 'margot-pixel';
-        div.style.left = (p.x * 4) + 'px';
-        div.style.top  = (p.y * 4) + 'px';
+        div.style.width  = px + 'px';
+        div.style.height = px + 'px';
+        div.style.left = (p.x * px) + 'px';
+        div.style.top  = (p.y * px) + 'px';
         div.style.background = p.c;
         container.appendChild(div);
       });
     }
-    drawMargot('margot-hero');
-    drawMargot('margot-intro-sprite');
+    drawMargot('margot-hero', 6);
+    drawMargot('margot-intro-sprite', 5);
   </script>
 </body>
 </html>
