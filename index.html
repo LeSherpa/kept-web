@@ -789,7 +789,7 @@
       padding: 100px 24px;
     }
     #evolution .hero-headline { text-align: center; margin: 0 auto; }
-    #evolution .hero-sub      { text-align: center; }
+    #evolution .hero-sub      { text-align: center; margin-top: 8px; margin-bottom: 0; }
     .evo-scroll-wrap {
       overflow-x: auto;
       width: 100%;
@@ -805,7 +805,7 @@
       align-items: flex-start;
       width: 100%;
       max-width: 900px;
-      margin: 60px auto 0;
+      margin: 32px auto 0;
       position: relative;
     }
     .evo-card {
@@ -853,21 +853,6 @@
     }
     .evo-sprite-wrap.evo-hover::before {
       opacity: 1;
-    }
-    .evo-tint {
-      position: absolute;
-      inset: 0;
-      border-radius: 4px;
-      pointer-events: none;
-      z-index: 10;
-      mix-blend-mode: color;
-    }
-    .evo-dim {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
-      z-index: 11;
-      pointer-events: none;
     }
     .evo-card:nth-child(2) .evo-sprite-wrap { animation-delay: 0s; }
     .evo-card:nth-child(3) .evo-sprite-wrap { animation-delay: 0.4s; }
@@ -1257,42 +1242,31 @@
           <div class="evo-connector" aria-hidden="true"></div>
 
           <div class="evo-card" style="--glow-color:rgba(60,60,80,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-0">
-              <div class="evo-tint" style="background:rgba(40,40,50,0.85);"></div>
-              <div class="evo-dim"></div>
-            </div>
+            <div class="evo-sprite-wrap" id="evo-sprite-0" style="filter:grayscale(1) brightness(0.45);"></div>
             <div class="evo-stage-num pixel-label" style="color:#555566;">01</div>
             <div class="evo-name">DORMANT</div>
           </div>
 
           <div class="evo-card" style="--glow-color:rgba(123,47,190,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-1">
-              <div class="evo-tint" style="background:rgba(123,47,190,0.0);"></div>
-            </div>
+            <div class="evo-sprite-wrap" id="evo-sprite-1" style="filter:none;"></div>
             <div class="evo-stage-num pixel-label" style="color:#9B50D8;">02</div>
             <div class="evo-name">AWAKENED</div>
           </div>
 
           <div class="evo-card" style="--glow-color:rgba(192,38,211,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-2">
-              <div class="evo-tint" style="background:rgba(192,38,211,0.35);"></div>
-            </div>
+            <div class="evo-sprite-wrap" id="evo-sprite-2" style="filter:saturate(1.4) brightness(1.05);"></div>
             <div class="evo-stage-num pixel-label" style="color:#C026D3;">03</div>
             <div class="evo-name">GROWING</div>
           </div>
 
           <div class="evo-card" style="--glow-color:rgba(232,64,122,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-3">
-              <div class="evo-tint" style="background:rgba(232,64,122,0.45);"></div>
-            </div>
+            <div class="evo-sprite-wrap" id="evo-sprite-3" style="filter:saturate(1.6) hue-rotate(330deg) brightness(1.1);"></div>
             <div class="evo-stage-num pixel-label" style="color:#E8407A;">04</div>
             <div class="evo-name">FLOURISHING</div>
           </div>
 
           <div class="evo-card" style="--glow-color:rgba(245,158,11,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-4">
-              <div class="evo-tint" style="background:rgba(245,158,11,0.6);"></div>
-            </div>
+            <div class="evo-sprite-wrap" id="evo-sprite-4" style="filter:sepia(1) saturate(3) hue-rotate(5deg) brightness(1.1);"></div>
             <div class="evo-stage-num pixel-label" style="color:#F59E0B;">05</div>
             <div class="evo-name">LEGENDARY</div>
           </div>
@@ -1327,7 +1301,7 @@
           <div class="price-divider"></div>
           <ul class="price-features">
             <li>Unlimited text surprises</li>
-            <li>Scheduling (near future)</li>
+            <li>Schedule up to 3 months ahead</li>
             <li>Surprise notifications</li>
             <li>Friends, family, or a partner</li>
           </ul>
@@ -1341,6 +1315,7 @@
           <div class="price-divider"></div>
           <ul class="price-features">
             <li>Everything in Free</li>
+            <li>Unlimited scheduling</li>
             <li>Photos, audio, video &amp; stickers</li>
           </ul>
           <a href="https://t.me/getkeptbot" class="btn-primary" target="_blank" rel="noopener" style="justify-content:center">
@@ -1748,18 +1723,14 @@
           wrap.removeEventListener('animationend', onBounceEnd);
         });
         if (idx === 0) {
-          var tint = wrap.querySelector('.evo-tint');
-          var dim  = wrap.querySelector('.evo-dim');
-          if (tint) { tint.style.transition = 'opacity 0.3s ease'; tint.style.opacity = '0'; }
-          if (dim)  { dim.style.transition  = 'opacity 0.3s ease'; dim.style.opacity  = '0'; }
+          wrap.style.transition = 'filter 0.3s ease';
+          wrap.style.filter = 'none';
         }
       });
       card.addEventListener('mouseleave', function() {
         if (idx === 0) {
-          var tint = wrap.querySelector('.evo-tint');
-          var dim  = wrap.querySelector('.evo-dim');
-          if (tint) { tint.style.transition = 'opacity 0.6s ease'; tint.style.opacity = '1'; }
-          if (dim)  { dim.style.transition  = 'opacity 0.6s ease'; dim.style.opacity  = '1'; }
+          wrap.style.transition = 'filter 0.6s ease';
+          wrap.style.filter = 'grayscale(1) brightness(0.45)';
         }
       });
     });
