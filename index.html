@@ -1258,32 +1258,32 @@
         <div class="evo-row reveal-children">
           <div class="evo-connector" aria-hidden="true"></div>
 
-          <div class="evo-card" style="--glow-color:rgba(60,60,80,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-0" style="filter:grayscale(1) brightness(0.35);"></div>
+          <div class="evo-card" style="--glow-color:rgba(144,144,144,0.5);">
+            <div class="evo-sprite-wrap" id="evo-sprite-0" style="filter:grayscale(1) brightness(0.65);"></div>
             <div class="evo-stage-num pixel-label" style="color:#555566;">01</div>
             <div class="evo-name">DORMANT</div>
           </div>
 
-          <div class="evo-card" style="--glow-color:rgba(123,47,190,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-1" style="filter:none;"></div>
+          <div class="evo-card" style="--glow-color:rgba(139,91,168,0.5);">
+            <div class="evo-sprite-wrap" id="evo-sprite-1" style="filter:sepia(1) hue-rotate(240deg) saturate(1.2) brightness(0.85);"></div>
             <div class="evo-stage-num pixel-label" style="color:#9B50D8;">02</div>
             <div class="evo-name">AWAKENED</div>
           </div>
 
-          <div class="evo-card" style="--glow-color:rgba(192,38,211,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-2" style="filter:saturate(1.8) brightness(1.05);"></div>
+          <div class="evo-card" style="--glow-color:rgba(123,47,158,0.5);">
+            <div class="evo-sprite-wrap" id="evo-sprite-2" style="filter:sepia(1) hue-rotate(255deg) saturate(2) brightness(0.9);"></div>
             <div class="evo-stage-num pixel-label" style="color:#C026D3;">03</div>
             <div class="evo-name">GROWING</div>
           </div>
 
-          <div class="evo-card" style="--glow-color:rgba(232,64,122,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-3" style="filter:sepia(0.5) hue-rotate(310deg) saturate(2.5) brightness(1.1);"></div>
+          <div class="evo-card" style="--glow-color:rgba(201,112,48,0.5);">
+            <div class="evo-sprite-wrap" id="evo-sprite-3" style="filter:sepia(1) saturate(2.8) brightness(1.0) hue-rotate(5deg);"></div>
             <div class="evo-stage-num pixel-label" style="color:#E8407A;">04</div>
             <div class="evo-name">FLOURISHING</div>
           </div>
 
-          <div class="evo-card" style="--glow-color:rgba(245,158,11,0.5);">
-            <div class="evo-sprite-wrap" id="evo-sprite-4" style="filter:sepia(1) saturate(3.5) brightness(1.1);"></div>
+          <div class="evo-card" style="--glow-color:rgba(245,168,0,0.5);">
+            <div class="evo-sprite-wrap" id="evo-sprite-4" style="filter:sepia(1) saturate(4) brightness(1.15);"></div>
             <div class="evo-stage-num pixel-label" style="color:#F59E0B;">05</div>
             <div class="evo-name">LEGENDARY</div>
           </div>
@@ -1740,16 +1740,6 @@
           wrap.classList.remove('evo-hover');
           wrap.removeEventListener('animationend', onBounceEnd);
         });
-        if (idx === 0) {
-          wrap.style.transition = 'filter 0.3s ease';
-          wrap.style.filter = 'grayscale(0.3) brightness(0.75)';
-        }
-      });
-      card.addEventListener('mouseleave', function() {
-        if (idx === 0) {
-          wrap.style.transition = 'filter 0.6s ease';
-          wrap.style.filter = 'grayscale(1) brightness(0.35)';
-        }
       });
     });
   </script>
