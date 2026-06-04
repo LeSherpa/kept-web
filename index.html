@@ -780,6 +780,61 @@
     }
 
     /* ════════════════════════════════
+       EVOLUTION
+    ════════════════════════════════ */
+    #evolution {
+      padding: 100px 24px;
+    }
+    .evo-row {
+      display: flex;
+      flex-direction: row;
+      gap: 32px;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 900px;
+      margin: 60px auto 0;
+      overflow-x: auto;
+      padding-bottom: 16px;
+    }
+    .evo-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      width: 140px;
+    }
+    .evo-sprite-wrap {
+      position: relative;
+      width: 96px;
+      height: 96px;
+      margin: 0 auto;
+      animation: margot-float 3s ease-in-out infinite;
+    }
+    .evo-card:nth-child(1) .evo-sprite-wrap { animation-delay: 0s; }
+    .evo-card:nth-child(2) .evo-sprite-wrap { animation-delay: 0.4s; }
+    .evo-card:nth-child(3) .evo-sprite-wrap { animation-delay: 0.8s; }
+    .evo-card:nth-child(4) .evo-sprite-wrap { animation-delay: 1.2s; }
+    .evo-card:nth-child(5) .evo-sprite-wrap { animation-delay: 1.6s; }
+    .evo-name {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 9px;
+      color: #fff;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .evo-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-style: italic;
+      text-align: center;
+      max-width: 120px;
+      line-height: 1.5;
+    }
+
+    /* ════════════════════════════════
        PRICING
     ════════════════════════════════ */
     .pricing-grid {
@@ -1119,6 +1174,65 @@
 
       </div>
 
+    </div>
+  </section>
+
+  <div class="pixel-divider" aria-hidden="true">
+    <div class="px-env" style="--ec:#6B21A8"></div>
+    <div class="px-env" style="--ec:#7D2B96"></div>
+    <div class="px-env" style="--ec:#8E3583"></div>
+    <div class="px-env" style="--ec:#A04071"></div>
+    <div class="px-env px-env-center" style="--ec:#B24A5F"></div>
+    <div class="px-env" style="--ec:#C4544C"></div>
+    <div class="px-env" style="--ec:#D65F3A"></div>
+    <div class="px-env" style="--ec:#E76928"></div>
+    <div class="px-env" style="--ec:#F97316"></div>
+  </div>
+
+  <!-- ════════════════ EVOLUTION ════════════════ -->
+  <section id="evolution">
+    <div style="max-width:900px;margin:0 auto;text-align:center;">
+      <div class="pixel-label" style="margin-bottom:16px;">THE FLAME</div>
+      <h2 class="hero-headline reveal" style="text-align:center;">Keep the <span class="grad-text">flame</span> alive.</h2>
+      <p class="hero-sub reveal" style="text-align:center;margin:16px auto 0;max-width:480px;">Margot grows with every keep. Tend her well.</p>
+      <div class="evo-row reveal-children">
+
+        <div class="evo-card">
+          <div class="evo-sprite-wrap" id="evo-sprite-0" style="filter:grayscale(80%) brightness(0.5);"></div>
+          <div class="evo-stage-num pixel-label">01</div>
+          <div class="evo-name">DORMANT</div>
+          <div class="evo-desc">Still. For now.</div>
+        </div>
+
+        <div class="evo-card">
+          <div class="evo-sprite-wrap" id="evo-sprite-1"></div>
+          <div class="evo-stage-num pixel-label">02</div>
+          <div class="evo-name">AWAKENED</div>
+          <div class="evo-desc">The first keep changes everything.</div>
+        </div>
+
+        <div class="evo-card">
+          <div class="evo-sprite-wrap" id="evo-sprite-2" style="filter:hue-rotate(20deg) saturate(1.3);"></div>
+          <div class="evo-stage-num pixel-label">03</div>
+          <div class="evo-name">GROWING</div>
+          <div class="evo-desc">She remembers. She grows.</div>
+        </div>
+
+        <div class="evo-card">
+          <div class="evo-sprite-wrap" id="evo-sprite-3" style="filter:hue-rotate(-20deg) saturate(1.5) brightness(1.15);"></div>
+          <div class="evo-stage-num pixel-label">04</div>
+          <div class="evo-name">FLOURISHING</div>
+          <div class="evo-desc">Every keep feeds the flame.</div>
+        </div>
+
+        <div class="evo-card">
+          <div class="evo-sprite-wrap" id="evo-sprite-4" style="filter:sepia(0.4) saturate(2.5) hue-rotate(5deg) brightness(1.2);"></div>
+          <div class="evo-stage-num pixel-label">05</div>
+          <div class="evo-name">LEGENDARY</div>
+          <div class="evo-desc">Some love becomes legendary.</div>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -1551,6 +1665,11 @@
     }
     drawMargot('margot-hero', 6);
     drawMargot('margot-intro-sprite', 6);
+    drawMargot('evo-sprite-0', 6);
+    drawMargot('evo-sprite-1', 6);
+    drawMargot('evo-sprite-2', 6);
+    drawMargot('evo-sprite-3', 6);
+    drawMargot('evo-sprite-4', 6);
   </script>
 </body>
 </html>
