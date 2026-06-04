@@ -837,15 +837,12 @@
     var CHAT_PAUSE   = 520; // ms pause after each line before next starts
 
     async function runMargotIntro() {
-      var avatar = document.getElementById('margot-avatar');
-      var chat   = document.getElementById('margot-chat');
-      var steps  = document.getElementById('margot-steps');
+      var chat  = document.getElementById('margot-chat');
+      var steps = document.getElementById('margot-steps');
 
-      // 1. Avatar slides in
-      avatar.classList.add('margot-in');
-      await delay(750);
+      await delay(400);
 
-      // 2. Lines appear one by one with typewriter + pause between
+      // Lines appear one by one with typewriter + pause between
       for (var i = 0; i < CHAT_LINES.length; i++) {
         var p = document.createElement('p');
         p.className = 'chat-line';
