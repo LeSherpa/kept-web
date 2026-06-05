@@ -103,6 +103,8 @@ All major values are tokenised. Use tokens — avoid raw px values for sizing/sp
 
 ### Shared
 - `.pixel-label` — Press Start 2P, `--pixel-xs`, #9B50D8, uppercase
+- `.section-kicker` — Press Start 2P `--pixel-md`, #9B50D8, uppercase. The `<h2>` section name (MEET MARGOT / HOW IT WORKS / THE FLAME / PRICING). Shared across 4 sections.
+- `.section-tagline` — JetBrains Mono `--text-2xl`, 700wt, centered. The `<p>` tagline under each kicker ("Three steps. That's it." / "See it in action." / "Keep the flame alive."). Editing this touches 3 sections at once.
 - `.pixel-divider` — envelope sprite row, z-index 2, transparent bg
 - `.px-env-center` — larger center envelope, glow filter
 - `.reveal` / `.reveal.visible` — fade+translate on scroll (IntersectionObserver, threshold 0.12)
