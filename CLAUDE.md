@@ -5,9 +5,10 @@ Single-file landing page for Kept (Telegram bot). One file: `index.html`.
 ## Stack
 Vanilla HTML/CSS/JS. No build tools, no frameworks. Windows/PowerShell env.
 Python available (`python`, not `python3`). PIL/Pillow installed.
+- Live at https://getkept.io (custom domain, GitHub Pages, HTTPS enforced). DNS at GoDaddy (4 A records → GitHub IPs, www CNAME → lesherpa.github.io). CNAME file in repo root.
 
 ## File structure (index.html ~2421 lines)
-- `<head>` CSS: lines ~14–1260
+- `<head>` CSS: lines ~14–1260. SEO tags present: og:title/description/type/url/site_name, theme-color, canonical → getkept.io. Favicons: favicon-16/32, apple-touch-icon (generated from Margot sprite). Also includes prefers-reduced-motion block and :focus-visible styles.
 - `<body>` structure (in order):
   - `<header class="site-nav">` — fixed nav (wordmark + links + CTA)
   - `<section id="hero">` — typewriter headline, Margot sprite, LEARN MORE scroll cue
@@ -47,6 +48,15 @@ Lo-fi / pixel art aesthetic throughout. This is intentional and consistent. Do n
 - Background: `--bg: #0A0A0C` / `--bg-panel: #0D0D11` (alternating panel tone)
 - Gradient: `#7B2FBE` → `#C026D3` → `#F97316` → `#F59E0B` (purple → orange → amber)
 - Fonts: Inter (body), JetBrains Mono (headlines — `--font-display`), Press Start 2P (pixel labels, nav links, prices, badges)
+
+---
+
+## Theme system (day/night)
+- Default = dark. Toggle in nav adds `data-theme="light"` to `<html>`.
+- Light tokens: `:root[data-theme="light"]` overrides --bg #F5F2EC, --bg-card #FFFFFF, --bg-panel #EDE8DF, --text #1A1620, --text-muted #5A5568, --text-dim #8A8499.
+- Light-mode element overrides exist for: body::after grain opacity, #hero::before glow, .site-nav, .price-card, .margot-speech-bubble + tail, .nav-wordmark, .evo-name.
+- Toggle button `#theme-toggle` in nav: pixel SVG sun (light) / moon (dark) + label that swaps "Dark"/"Light". Moon path is a computed disc-minus-disc crescent.
+- No persistence — resets to dark on reload (no localStorage used anywhere).
 
 ---
 
@@ -169,7 +179,7 @@ All major values are tokenised. Use tokens — avoid raw px values for sizing/sp
 - `≤ 900px`: Telegram mockups stack vertically
 - `≤ 760px`: Nav links hidden, hero headline smaller, HIW row stacks, speech bubble tail hidden, evo row compresses
 - `≤ 560px`: Evo row wraps, connector hidden
-- `≤ 480px`: Section padding reduced, pricing grid 1-col
+- `≤ 600px`: Section padding reduced, pricing grid 1-col, overflow containment
 
 ---
 
@@ -179,3 +189,6 @@ All major values are tokenised. Use tokens — avoid raw px values for sizing/sp
 - CSS custom properties in `:root`
 - Pixel divider markup (duplicate for new sections, never modify existing dividers)
 - `drawMargot` function internals / stageColors object
+- The grain texture is an inline SVG feTurbulence noise (NOT base64 — the old base64 was corrupt and threw console errors).
+- `html, body { overflow-x: clip }` — required to prevent mobile horizontal scroll; do not change to `hidden`.
+- CNAME file in repo root (holds getkept.io) — do not delete or GitHub Pages custom domain breaks.
