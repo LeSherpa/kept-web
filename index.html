@@ -100,6 +100,7 @@
     :root[data-theme="light"] .nav-wordmark { color: #1A1620; }
     :root[data-theme="light"] .evo-name { color: #1A1620; }
 
+    html, body { max-width: 100%; overflow-x: hidden; }
     html { scroll-behavior: smooth; }
 
     body {
@@ -1496,9 +1497,12 @@
     @media (max-width: 480px) {
       #margot-intro  { padding: 56px 16px; }
       .btn-primary   { padding: 14px 24px; font-size: 0.95rem; }
-      .price-card    { padding: 32px 24px; }
-      .pricing-grid  { grid-template-columns: 1fr; gap: 20px; }
-      .section       { padding: 72px 20px; }
+      .price-card    { padding: 32px 20px; min-width: 0; }
+      .pricing-grid  { grid-template-columns: 1fr; gap: 20px; max-width: 100%; padding: 0; }
+      .popular-badge { right: 4px; top: -10px; }
+      .site-nav      { padding: 10px 16px; }
+      .nav-inner     { gap: 12px; }
+      .section       { padding-left: 16px; padding-right: 16px; max-width: 100%; }
     }
     body::after {
       content: '';
