@@ -285,17 +285,27 @@
 
     #scroll-indicator {
       position: absolute;
-      bottom: 36px;
+      bottom: 32px;
       left: 50%;
-      color: rgba(255, 255, 255, 0.28);
-      transition: opacity 0.5s ease;
-      pointer-events: none;
-      animation: scrollBounce 2s ease-in-out infinite;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      animation: scroll-bob 2s ease-in-out infinite;
     }
-
-    @keyframes scrollBounce {
+    #scroll-indicator:hover { color: #C026D3; }
+    .scroll-indicator-label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      letter-spacing: 1.5px;
+    }
+    @keyframes scroll-bob {
       0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(9px); }
+      50% { transform: translateX(-50%) translateY(6px); }
     }
 
     /* HERO ENHANCEMENT 1: floating pixels */
@@ -1394,6 +1404,7 @@
     <div class="nav-inner">
       <a href="#hero" class="nav-wordmark">Kept</a>
       <nav class="nav-links">
+        <a href="#margot-intro">Meet Margot</a>
         <a href="#how-it-works">How it works</a>
         <a href="#evolution">The flame</a>
         <a href="#pricing">Pricing</a>
@@ -1445,11 +1456,12 @@
     <div class="hero-deco hero-deco-sparkle" aria-hidden="true" style="left:calc(50% + 100px);top:calc(33% + 48px);animation:float-a 3.5s ease-in-out infinite;animation-delay:-1s;"></div>
     <!-- END HERO ENHANCEMENT 1 -->
 
-    <div id="scroll-indicator" aria-hidden="true">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <a href="#margot-intro" id="scroll-indicator" aria-label="Learn more">
+      <span class="scroll-indicator-label">LEARN MORE</span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="6 9 12 15 18 9"/>
       </svg>
-    </div>
+    </a>
   </section>
 
   <div class="pixel-divider" aria-hidden="true">
