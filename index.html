@@ -1207,7 +1207,7 @@
       border-radius: 4px;
       padding: 14px 18px;
       width: 300px;
-      height: 98px;
+      height: 90px;
       margin-top: 12px;
       box-shadow: 3px 3px 0 #4A1A8A;
       opacity: 0;
@@ -1247,8 +1247,8 @@
       font-weight: 400;
       margin: 0;
       min-height: 0;
-      height: 46px;
-      overflow: visible;
+      height: 38px;
+      overflow: hidden;
       display: block;
     }
 
@@ -2248,31 +2248,16 @@
         typed = true;
         var i = 0;
         textEl.innerHTML = '';
-        var emojiSpan = null;
         var interval = setInterval(function() {
           var ch = fullText[i];
           if (ch === '\n') {
             textEl.appendChild(document.createElement('br'));
-            emojiSpan = document.createElement('span');
-            emojiSpan.style.fontFamily = 'Inter, sans-serif';
-            emojiSpan.style.fontSize = '22px';
-            emojiSpan.style.marginLeft = '6px';
-            emojiSpan.style.verticalAlign = 'middle';
-            emojiSpan.style.opacity = '0';
-            emojiSpan.textContent = '💅';
-            textEl.appendChild(emojiSpan);
           } else {
-            var node = document.createTextNode(ch);
-            if (emojiSpan) {
-              textEl.insertBefore(node, emojiSpan);
-            } else {
-              textEl.appendChild(node);
-            }
+            textEl.appendChild(document.createTextNode(ch));
           }
           i++;
           if (i >= fullText.length) {
             clearInterval(interval);
-            if (emojiSpan) emojiSpan.style.opacity = '1';
           }
         }, 65);
       }
