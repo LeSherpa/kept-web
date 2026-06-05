@@ -1573,6 +1573,13 @@
   </footer>
 
   <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.addEventListener('load', function() {
+      window.scrollTo(0, 0);
+    });
+
     // ── helpers ──────────────────────────────────────────────────────
     function delay(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
 
