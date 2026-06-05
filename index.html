@@ -1144,7 +1144,8 @@
       border: 2px solid #7B2FBE;
       border-radius: 4px;
       padding: 14px 18px;
-      width: 260px;
+      width: 300px;
+      height: 90px;
       margin-top: 12px;
       box-shadow: 3px 3px 0 #4A1A8A;
       opacity: 0;
@@ -1178,7 +1179,7 @@
     }
     .margot-speech-text {
       font-family: 'Press Start 2P', monospace;
-      font-size: 10px;
+      font-size: 9px;
       line-height: 2;
       color: #FFFFFF;
       font-weight: 400;
@@ -2022,7 +2023,7 @@
     (function() {
       var bubble = document.getElementById('margot-speech-bubble');
       var textEl = document.getElementById('margot-speech-text');
-      var fullText = "I keep what matters.\nYou tell me when. 💅";
+      var fullText = "I keep what matters.\nYou tell me when.";
       var typed = false;
 
       function typeText() {
@@ -2038,7 +2039,16 @@
             textEl.appendChild(document.createTextNode(ch));
           }
           i++;
-          if (i >= fullText.length) clearInterval(interval);
+          if (i >= fullText.length) {
+            clearInterval(interval);
+            var emoji = document.createElement('span');
+            emoji.style.fontFamily = 'Inter, sans-serif';
+            emoji.style.fontSize = '18px';
+            emoji.style.marginLeft = '6px';
+            emoji.style.verticalAlign = 'middle';
+            emoji.textContent = '💅';
+            textEl.appendChild(emoji);
+          }
         }, 65);
       }
 
