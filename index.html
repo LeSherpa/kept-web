@@ -1144,7 +1144,7 @@
       border: 2px solid #7B2FBE;
       border-radius: 4px;
       padding: 16px 20px;
-      max-width: 280px;
+      width: 280px;
       margin-top: 12px;
       box-shadow: 3px 3px 0 #4A1A8A;
       opacity: 0;
@@ -1183,14 +1183,7 @@
       font-weight: 400;
       line-height: 1.6;
       margin: 0 0 8px 0;
-      min-height: 3.2em;
-    }
-    .margot-speech-sig {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 7px;
-      color: #9B50D8;
-      display: block;
-      text-align: right;
+      min-height: 5em;
     }
 
     /* ════════════════════════════════
@@ -1319,7 +1312,6 @@
         <div class="margot-speech-bubble" id="margot-speech-bubble">
           <div class="margot-speech-tail" aria-hidden="true"></div>
           <p class="margot-speech-text" id="margot-speech-text"></p>
-          <span class="margot-speech-sig">💅 — Margot</span>
         </div>
       </div>
 
@@ -2030,7 +2022,7 @@
     (function() {
       var bubble = document.getElementById('margot-speech-bubble');
       var textEl = document.getElementById('margot-speech-text');
-      var fullText = "I keep what matters. You tell me when. I handle the rest.";
+      var fullText = "I keep what matters. You tell me when. I handle the rest. 💅";
       var typed = false;
 
       function typeText() {
@@ -2042,7 +2034,7 @@
           textEl.textContent += fullText[i];
           i++;
           if (i >= fullText.length) clearInterval(interval);
-        }, 38);
+        }, 65);
       }
 
       var observer = new IntersectionObserver(function(entries) {
