@@ -982,6 +982,31 @@
       background: var(--bg-card);
       border: 2px solid #7B2FBE;
       box-shadow: 4px 4px 0 #C026D3;
+      position: relative;
+    }
+    .popular-badge {
+      position: absolute;
+      top: -12px;
+      right: -8px;
+      z-index: 5;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #1A1206;
+      background: #F5A800;
+      padding: 6px 10px;
+      border-radius: 3px;
+      border: 2px solid #C97030;
+      box-shadow: 2px 2px 0 rgba(201, 112, 48, 0.6);
+      transform: rotate(3deg) scale(0.8);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .popular-badge.badge-visible {
+      opacity: 1;
+      transform: rotate(3deg) scale(1);
     }
 
     .price-label {
@@ -1738,6 +1763,7 @@
         </div>
 
         <div class="price-card featured">
+          <div class="popular-badge" id="popular-badge" aria-hidden="true">MOST POPULAR</div>
           <div class="price-label">Plus</div>
           <div class="price-control">
             <div class="billing-toggle" role="group" aria-label="Billing period">
@@ -2379,6 +2405,14 @@
           var d = data[btn.getAttribute('data-period')];
           priceEl.textContent = d.price;
           periodEl.textContent = d.period;
+          var badge = document.getElementById('popular-badge');
+          if (badge) {
+            if (btn.getAttribute('data-period') === 'annual') {
+              badge.classList.add('badge-visible');
+            } else {
+              badge.classList.remove('badge-visible');
+            }
+          }
         });
       });
     })();
