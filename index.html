@@ -8,6 +8,13 @@
   <meta property="og:title" content="Kept — Some things are worth keeping." />
   <meta property="og:description" content="Leave a surprise for someone you love. Margot keeps it safe until the moment is right." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lesherpa.github.io/kept-web/" />
+  <meta property="og:site_name" content="Kept" />
+  <meta name="theme-color" content="#0A0A0C" />
+  <link rel="canonical" href="https://lesherpa.github.io/kept-web/" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700;800&family=Press+Start+2P&display=swap" rel="stylesheet" />
@@ -1447,6 +1454,32 @@
       pointer-events: none;
       z-index: 9999;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal, .reveal-children > * { opacity: 1 !important; transform: none !important; }
+      #scroll-indicator { animation: none !important; }
+      .margot-sprite, .evo-sprite-wrap { animation: none !important; }
+      .hero-deco { display: none !important; }
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    .billing-opt:focus-visible,
+    .nav-cta:focus-visible,
+    .btn-primary:focus-visible,
+    .tg-replay:focus-visible {
+      outline: 2px solid #C026D3;
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+    a:focus:not(:focus-visible),
+    button:focus:not(:focus-visible) { outline: none; }
   </style>
 </head>
 <body>
