@@ -119,9 +119,11 @@
       padding: 16px 32px;
       background: var(--gradient);
       color: #fff;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      font-size: var(--text-base);
+      font-family: 'Press Start 2P', monospace;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
       text-decoration: none;
       border-radius: 4px;
       border: none;
@@ -1243,7 +1245,8 @@
     .nav-inner {
       max-width: 1320px;
       margin: 0 auto;
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
       gap: 24px;
     }
@@ -1255,12 +1258,13 @@
       letter-spacing: -0.02em;
       text-decoration: none;
       flex-shrink: 0;
+      justify-self: start;
     }
     .nav-links {
       display: flex;
       align-items: center;
       gap: 28px;
-      margin: 0 auto;
+      justify-self: center;
     }
     .nav-links a {
       font-family: 'Press Start 2P', monospace;
@@ -1281,17 +1285,18 @@
       text-transform: uppercase;
       color: #FFFFFF;
       text-decoration: none;
-      padding: 11px 16px;
-      background: transparent;
-      border: 2px solid #7B2FBE;
+      padding: 12px 16px;
+      background: var(--gradient);
+      border: none;
       border-radius: 4px;
       box-shadow: 3px 3px 0 #4A1A8A;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+      transition: opacity 0.2s, transform 0.15s ease, box-shadow 0.15s ease;
+      justify-self: end;
       flex-shrink: 0;
       white-space: nowrap;
     }
     .nav-cta:hover {
-      background: rgba(123, 47, 190, 0.15);
+      opacity: 0.92;
       transform: translate(-1px, -1px);
       box-shadow: 4px 4px 0 #4A1A8A;
     }
@@ -2245,16 +2250,19 @@
         return { link: a, section: document.querySelector(a.getAttribute('href')) };
       }).filter(function(m) { return m.section; });
       if (!map.length) return;
+      var hero = document.getElementById('hero');
+      function clearAll() { map.forEach(function(m) { m.link.classList.remove('nav-active'); }); }
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            map.forEach(function(m) { m.link.classList.remove('nav-active'); });
-            var match = map.find(function(m) { return m.section === entry.target; });
-            if (match) match.link.classList.add('nav-active');
-          }
+          if (!entry.isIntersecting) return;
+          if (entry.target === hero) { clearAll(); return; }
+          clearAll();
+          var match = map.find(function(m) { return m.section === entry.target; });
+          if (match) match.link.classList.add('nav-active');
         });
       }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
       map.forEach(function(m) { observer.observe(m.section); });
+      if (hero) observer.observe(hero);
     })();
   </script>
 </body>
