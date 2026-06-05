@@ -1225,35 +1225,42 @@
     ════════════════════════════════ */
     .site-nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 1000;
-      padding: 14px 24px;
-      background: transparent;
-      border-bottom: 1px solid transparent;
-      transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+      padding: 12px 32px;
+      background: rgba(10, 10, 12, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
     .site-nav.nav-scrolled {
-      background: rgba(10, 10, 12, 0.72);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(10, 10, 12, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     .nav-inner {
-      max-width: 1100px;
+      max-width: 1320px;
       margin: 0 auto;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 28px;
+      gap: 24px;
+    }
+    .nav-wordmark {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      flex-shrink: 0;
     }
     .nav-links {
       display: flex;
       align-items: center;
       gap: 28px;
-      margin-left: 0;
-      margin-right: 0;
+      margin: 0 auto;
     }
     .nav-links a {
       font-family: 'Press Start 2P', monospace;
@@ -1268,12 +1275,33 @@
     .nav-links a:hover { color: #FFFFFF; }
     .nav-links a.nav-active { color: #C026D3; }
     .nav-cta {
-      padding: 9px 18px !important;
-      font-size: 0.82rem !important;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      text-decoration: none;
+      padding: 11px 16px;
+      background: transparent;
+      border: 2px solid #7B2FBE;
+      border-radius: 4px;
+      box-shadow: 3px 3px 0 #4A1A8A;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
       flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .nav-cta:hover {
+      background: rgba(123, 47, 190, 0.15);
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 #4A1A8A;
+    }
+    .nav-cta:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 #4A1A8A;
     }
     @media (max-width: 760px) {
       .nav-links { display: none; }
+      .site-nav { padding: 10px 20px; }
     }
 
     /* ════════════════════════════════
@@ -1324,12 +1352,13 @@
 
   <header class="site-nav" id="site-nav">
     <div class="nav-inner">
+      <a href="#hero" class="nav-wordmark">Kept</a>
       <nav class="nav-links">
         <a href="#margot-intro">How it works</a>
         <a href="#evolution">The flame</a>
         <a href="#pricing">Pricing</a>
       </nav>
-      <a href="https://t.me/getkeptbot" class="nav-cta btn-primary" target="_blank" rel="noopener">Try on Telegram</a>
+      <a href="https://t.me/getkeptbot" class="nav-cta" target="_blank" rel="noopener">Try on Telegram</a>
     </div>
   </header>
 
@@ -2200,9 +2229,9 @@
       });
     });
 
-    // nav scroll state
     (function() {
       var nav = document.getElementById('site-nav');
+      if (!nav) return;
       function onScroll() {
         if (window.scrollY > 40) nav.classList.add('nav-scrolled');
         else nav.classList.remove('nav-scrolled');
@@ -2210,13 +2239,12 @@
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
     })();
-
-    // active section highlight
     (function() {
       var links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
       var map = links.map(function(a) {
         return { link: a, section: document.querySelector(a.getAttribute('href')) };
       }).filter(function(m) { return m.section; });
+      if (!map.length) return;
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
