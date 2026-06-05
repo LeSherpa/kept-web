@@ -65,6 +65,41 @@
       --section-py: 80px;
     }
 
+    :root[data-theme="light"] {
+      --bg: #F5F2EC;
+      --bg-card: #FFFFFF;
+      --bg-panel: #EDE8DF;
+      --text: #1A1620;
+      --text-muted: #5A5568;
+      --text-dim: #8A8499;
+    }
+
+    :root[data-theme="light"] body::after { opacity: 0.02; }
+    :root[data-theme="light"] #hero::before {
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(123, 47, 190, 0.10) 0%, transparent 70%);
+    }
+    :root[data-theme="light"] .site-nav {
+      background: rgba(245, 242, 236, 0.6);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    :root[data-theme="light"] .site-nav.nav-scrolled {
+      background: rgba(245, 242, 236, 0.85);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    }
+    :root[data-theme="light"] .price-card {
+      border: 2px solid rgba(0, 0, 0, 0.12);
+      box-shadow: 4px 4px 0 rgba(123, 47, 190, 0.25);
+    }
+    :root[data-theme="light"] .margot-speech-bubble {
+      background: #FFFFFF;
+    }
+    :root[data-theme="light"] .margot-speech-tail::after {
+      border-right-color: #FFFFFF;
+    }
+    :root[data-theme="light"] .margot-speech-text { color: #1A1620; }
+    :root[data-theme="light"] .nav-wordmark { color: #1A1620; }
+    :root[data-theme="light"] .evo-name { color: #1A1620; }
+
     html { scroll-behavior: smooth; }
 
     body {
@@ -74,6 +109,7 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
     }
 
     .pixel-label {
@@ -1399,7 +1435,6 @@
       border-radius: 4px;
       box-shadow: 3px 3px 0 #4A1A8A;
       transition: opacity 0.2s, transform 0.15s ease, box-shadow 0.15s ease;
-      justify-self: end;
       flex-shrink: 0;
       white-space: nowrap;
     }
@@ -1500,6 +1535,45 @@
     }
     a:focus:not(:focus-visible),
     button:focus:not(:focus-visible) { outline: none; }
+
+    .theme-toggle {
+      width: 34px;
+      height: 34px;
+      padding: 0;
+      background: transparent;
+      border: 2px solid var(--text-muted);
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.2s ease;
+    }
+    .theme-toggle:hover { border-color: #C026D3; }
+
+    .theme-icon-sun, .theme-icon-moon {
+      width: 4px; height: 4px;
+      display: block;
+    }
+    .theme-icon-sun {
+      background: #F5A800;
+      box-shadow:
+        0 -7px 0 0 #F5A800, 0 7px 0 0 #F5A800, -7px 0 0 0 #F5A800, 7px 0 0 0 #F5A800,
+        -4px -4px 0 0 #F5A800, 4px -4px 0 0 #F5A800, -4px 4px 0 0 #F5A800, 4px 4px 0 0 #F5A800,
+        0 0 0 1px #F5A800;
+    }
+    .theme-icon-moon {
+      background: #9B50D8;
+      box-shadow:
+        -3px -3px 0 0 #9B50D8, 0 -4px 0 0 #9B50D8, 3px -2px 0 0 #9B50D8,
+        -4px 0 0 0 #9B50D8, -4px 3px 0 0 #9B50D8, -2px 4px 0 0 #9B50D8, 1px 4px 0 0 #9B50D8;
+      display: none;
+    }
+    .theme-icon-sun { display: none; }
+    :root[data-theme="light"] .theme-icon-sun { display: block; }
+    :root[data-theme="light"] .theme-icon-moon { display: none; }
+    .theme-icon-moon { display: block; }
   </style>
 </head>
 <body>
@@ -1513,7 +1587,13 @@
         <a href="#evolution">The flame</a>
         <a href="#pricing">Pricing</a>
       </nav>
-      <a href="https://t.me/getkeptbot" class="nav-cta" target="_blank" rel="noopener">Try on Telegram</a>
+      <div style="justify-self:end;display:flex;align-items:center;gap:14px;">
+        <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle day/night mode">
+          <span class="theme-icon-sun" aria-hidden="true"></span>
+          <span class="theme-icon-moon" aria-hidden="true"></span>
+        </button>
+        <a href="https://t.me/getkeptbot" class="nav-cta" target="_blank" rel="noopener">Try on Telegram</a>
+      </div>
     </div>
   </header>
 
@@ -2461,6 +2541,19 @@
             }
           }
         });
+      });
+    })();
+
+    (function() {
+      var btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+      var root = document.documentElement;
+      btn.addEventListener('click', function() {
+        if (root.getAttribute('data-theme') === 'light') {
+          root.removeAttribute('data-theme');
+        } else {
+          root.setAttribute('data-theme', 'light');
+        }
       });
     })();
   </script>
