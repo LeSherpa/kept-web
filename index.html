@@ -1143,8 +1143,8 @@
       background: #1A1A2E;
       border: 2px solid #7B2FBE;
       border-radius: 4px;
-      padding: 16px 20px;
-      width: 280px;
+      padding: 14px 18px;
+      width: 260px;
       margin-top: 12px;
       box-shadow: 3px 3px 0 #4A1A8A;
       opacity: 0;
@@ -1177,13 +1177,13 @@
       border-right: 9px solid #1A1A2E;
     }
     .margot-speech-text {
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      line-height: 2;
       color: #FFFFFF;
       font-weight: 400;
-      line-height: 1.6;
-      margin: 0 0 8px 0;
-      min-height: 5em;
+      margin: 0;
+      min-height: 0;
     }
 
     /* ════════════════════════════════
@@ -2022,16 +2022,21 @@
     (function() {
       var bubble = document.getElementById('margot-speech-bubble');
       var textEl = document.getElementById('margot-speech-text');
-      var fullText = "I keep what matters. You tell me when. I handle the rest. 💅";
+      var fullText = "I keep what matters.\nYou tell me when. 💅";
       var typed = false;
 
       function typeText() {
         if (typed) return;
         typed = true;
         var i = 0;
-        textEl.textContent = '';
+        textEl.innerHTML = '';
         var interval = setInterval(function() {
-          textEl.textContent += fullText[i];
+          var ch = fullText[i];
+          if (ch === '\n') {
+            textEl.appendChild(document.createElement('br'));
+          } else {
+            textEl.appendChild(document.createTextNode(ch));
+          }
           i++;
           if (i >= fullText.length) clearInterval(interval);
         }, 65);
