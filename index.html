@@ -1058,10 +1058,6 @@
     /* ════════════════════════════════
        HOW IT WORKS
     ════════════════════════════════ */
-    #how-it-works {
-      padding: 80px 24px;
-      text-align: center;
-    }
     .hiw-label {
       margin-bottom: 48px;
     }
@@ -1233,57 +1229,13 @@
     <div class="px-env" style="--ec:#F97316"></div>
   </div>
 
-  <!-- ════════════════ HOW IT WORKS ════════════════ -->
-  <section id="how-it-works">
-    <div class="hiw-label">
-      <span class="pixel-label">HOW IT WORKS</span>
-    </div>
-    <div class="hiw-row reveal-children">
-      <div class="hiw-connector" aria-hidden="true"></div>
-      <div class="hiw-step">
-        <div class="hiw-icon-wrap">
-          <canvas id="hiw-icon-0"></canvas>
-        </div>
-        <div class="hiw-step-num">01</div>
-        <p class="hiw-title">You keep it.</p>
-        <p class="hiw-desc">Write a message, attach a photo, pick a moment.</p>
-      </div>
-      <div class="hiw-step">
-        <div class="hiw-icon-wrap">
-          <canvas id="hiw-icon-1"></canvas>
-        </div>
-        <div class="hiw-step-num">02</div>
-        <p class="hiw-title">Margot holds it.</p>
-        <p class="hiw-desc">She keeps your secret until the time is right.</p>
-      </div>
-      <div class="hiw-step">
-        <div class="hiw-icon-wrap">
-          <canvas id="hiw-icon-2"></canvas>
-        </div>
-        <div class="hiw-step-num">03</div>
-        <p class="hiw-title">They feel it.</p>
-        <p class="hiw-desc">Delivered exactly when it matters.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- HERO ENHANCEMENT 4: pixel art divider (replaces plain hr) -->
-  <div class="pixel-divider" aria-hidden="true">
-    <div class="px-env" style="--ec:#6B21A8"></div>
-    <div class="px-env" style="--ec:#7D2B96"></div>
-    <div class="px-env" style="--ec:#8E3583"></div>
-    <div class="px-env" style="--ec:#A04071"></div>
-    <div class="px-env px-env-center" style="--ec:#B24A5F"></div>
-    <div class="px-env" style="--ec:#C4544C"></div>
-    <div class="px-env" style="--ec:#D65F3A"></div>
-    <div class="px-env" style="--ec:#E76928"></div>
-    <div class="px-env" style="--ec:#F97316"></div>
-  </div>
-  <!-- END HERO ENHANCEMENT 4 -->
-
   <!-- ════════════════ MARGOT INTRO ════════════════ -->
   <section id="margot-intro">
     <div class="margot-intro-inner">
+
+      <div class="hiw-label" style="margin-bottom:4px;">
+        <span class="pixel-label">HOW IT WORKS</span>
+      </div>
 
       <div class="margot-sprite" id="margot-intro-sprite"
            style="width:96px;height:96px;margin:0 auto 16px;">
@@ -1292,9 +1244,37 @@
       <div class="pixel-label" style="text-align:center;">
         ✦ MARGOT ✦
       </div>
-      <p style="font-family:'Inter',sans-serif;font-size:16px;color:#9B94B0;font-weight:300;max-width:480px;text-align:center;margin:12px auto 48px;">
-        Your AI companion. She keeps your surprises safe, delivers them at the right moment, and grows with your relationship over time.
+      <p style="font-family:'Inter',sans-serif;font-size:16px;color:#9B94B0;font-weight:300;max-width:480px;text-align:center;margin:12px auto 40px;">
+        I keep what matters. You tell me when. I handle the rest. 💅
       </p>
+
+      <div class="hiw-row reveal-children" style="margin-bottom:48px;">
+        <div class="hiw-connector" aria-hidden="true"></div>
+        <div class="hiw-step">
+          <div class="hiw-icon-wrap">
+            <canvas id="hiw-icon-0"></canvas>
+          </div>
+          <div class="hiw-step-num">01</div>
+          <p class="hiw-title">Share it with Margot.</p>
+          <p class="hiw-desc">Write a message, attach a photo or audio, pick a moment.</p>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-icon-wrap">
+            <canvas id="hiw-icon-1"></canvas>
+          </div>
+          <div class="hiw-step-num">02</div>
+          <p class="hiw-title">Margot holds it.</p>
+          <p class="hiw-desc">She keeps your secret until the time is right.</p>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-icon-wrap">
+            <canvas id="hiw-icon-2"></canvas>
+          </div>
+          <div class="hiw-step-num">03</div>
+          <p class="hiw-title">Margot delivers it.</p>
+          <p class="hiw-desc">Handed over exactly when it matters.</p>
+        </div>
+      </div>
 
       <div class="tg-mockups-row">
 
@@ -1905,21 +1885,21 @@
       if (!c) return;
       px = px || 5;
       var grid = [
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
         [0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0],
         [0,0,0,0,1,2,2,2,2,2,2,1,0,0,0,0],
-        [0,0,0,0,1,2,2,2,2,2,2,1,0,0,0,0],
-        [0,0,0,0,1,2,2,0,0,2,2,1,0,0,0,0],
-        [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
-        [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
-        [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
-        [1,2,2,2,2,2,2,3,3,2,2,2,2,2,2,1],
-        [1,2,2,2,2,2,3,2,2,3,2,2,2,2,2,1],
-        [1,2,2,2,2,2,2,2,4,2,2,2,2,2,2,1],
-        [1,2,2,2,2,2,2,2,4,2,2,2,2,2,2,1],
-        [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
-        [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
-        [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+        [0,0,0,1,2,2,0,0,0,0,2,2,1,0,0,0],
+        [0,0,0,1,2,2,0,0,0,0,2,2,1,0,0,0],
+        [0,0,0,1,2,2,0,0,0,0,2,2,1,0,0,0],
+        [0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
+        [0,1,2,2,2,2,2,2,2,2,2,2,2,2,1,0],
+        [0,1,2,2,2,2,2,2,2,2,2,2,2,2,1,0],
+        [0,1,2,2,2,2,2,3,3,2,2,2,2,2,1,0],
+        [0,1,2,2,2,2,3,2,2,3,2,2,2,2,1,0],
+        [0,1,2,2,2,2,2,2,4,2,2,2,2,2,1,0],
+        [0,1,2,2,2,2,2,2,4,2,2,2,2,2,1,0],
+        [0,1,2,2,2,2,2,2,2,2,2,2,2,2,1,0],
+        [0,1,2,2,2,2,2,2,2,2,2,2,2,2,1,0],
+        [0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
       ];
       var colors = { 0:'transparent', 1:'#4A1A8A', 2:'#7B2FBE', 3:'#9B50D8', 4:'#F59E0B' };
@@ -1940,7 +1920,6 @@
       px = px || 5;
       var grid = [
         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
         [0,0,1,1,1,0,0,0,0,0,1,1,1,0,0,0],
         [0,1,2,2,2,1,0,0,0,1,2,2,2,1,0,0],
         [1,2,2,2,2,2,1,0,1,2,2,2,2,2,1,0],
@@ -1953,6 +1932,7 @@
         [0,0,0,0,0,1,2,2,2,1,0,0,0,0,0,0],
         [0,0,0,0,0,0,1,2,1,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
       ];
