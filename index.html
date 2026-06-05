@@ -26,7 +26,34 @@
       --text-dim: #5A5A6A;
       --gradient: linear-gradient(135deg, #6B21A8 0%, #C026D3 40%, #F97316 100%);
       --gradient-border: linear-gradient(135deg, #6B21A8, #C026D3, #F97316);
-      --radius: 16px;
+      --radius: 4px;
+      /* Type scale */
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.375rem;
+      --text-2xl: clamp(1.6rem, 4vw, 2.2rem);
+      --text-3xl: clamp(2.4rem, 6vw, 4rem);
+      --text-lead: clamp(1rem, 2.5vw, 1.2rem);
+      /* Pixel type scale (Press Start 2P) */
+      --pixel-xs: 8px;
+      --pixel-sm: 9px;
+      --pixel-md: 11px;
+      /* Spacing scale (8px base) */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --space-15: 60px;
+      --space-20: 80px;
+      /* Section rhythm */
+      --section-py: 80px;
     }
 
     html { scroll-behavior: smooth; }
@@ -42,7 +69,7 @@
 
     .pixel-label {
       font-family: 'Press Start 2P', monospace;
-      font-size: 8px;
+      font-size: var(--pixel-xs);
       color: #9B50D8;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -93,7 +120,7 @@
       color: #fff;
       font-family: 'Inter', sans-serif;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: var(--text-base);
       text-decoration: none;
       border-radius: 4px;
       border: none;
@@ -115,16 +142,16 @@
     }
 
     .section {
-      padding: 100px 24px;
+      padding: var(--section-py) 24px;
       max-width: 1100px;
       margin: 0 auto;
     }
 
     .section-title {
-      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-size: var(--text-2xl);
       font-weight: 700;
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: var(--space-15);
       letter-spacing: -0.02em;
     }
 
@@ -221,27 +248,27 @@
     }
 
     .hero-headline {
-      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-size: var(--text-3xl);
       font-weight: 700;
       letter-spacing: -0.03em;
       line-height: 1.15;
-      margin-bottom: 20px;
+      margin-bottom: var(--space-5);
       max-width: 640px;
       min-height: 2.35em;
     }
 
     .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-size: var(--text-lead);
       color: var(--text-muted);
       max-width: 480px;
-      margin: 0 auto 40px;
+      margin: 0 auto var(--space-10);
       font-weight: 400;
       line-height: 1.75;
     }
 
     .hero-fine {
-      margin-top: 16px;
-      font-size: 0.82rem;
+      margin-top: var(--space-4);
+      font-size: var(--text-xs);
       color: var(--text-dim);
       letter-spacing: 0.01em;
     }
@@ -366,7 +393,7 @@
        MARGOT INTRO (combined section)
     ════════════════════════════════ */
     #margot-intro {
-      padding: 80px 24px;
+      padding: var(--section-py) 24px;
     }
 
     .margot-intro-inner {
@@ -787,7 +814,7 @@
        EVOLUTION
     ════════════════════════════════ */
     #evolution {
-      padding: 80px 24px;
+      padding: var(--section-py) 24px;
     }
     .evo-scroll-wrap {
       overflow-x: auto;
@@ -864,7 +891,7 @@
     .evo-card:nth-child(6) .evo-sprite-wrap { animation-delay: 1.6s; }
     .evo-name {
       font-family: 'Press Start 2P', monospace;
-      font-size: 9px;
+      font-size: var(--pixel-sm);
       color: #fff;
       text-align: center;
       letter-spacing: 1px;
@@ -901,7 +928,7 @@
     .pricing-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      gap: var(--space-6);
       max-width: 780px;
       margin: 0 auto;
     }
@@ -909,7 +936,7 @@
     .price-card {
       background: var(--bg-card);
       border-radius: var(--radius);
-      padding: 40px 36px;
+      padding: var(--space-10) 36px;
       border: 1px solid rgba(255, 255, 255, 0.07);
       display: flex;
       flex-direction: column;
@@ -922,7 +949,7 @@
     }
 
     .price-label {
-      font-size: 0.75rem;
+      font-size: var(--text-xs);
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -951,7 +978,7 @@
     }
 
     .price-period {
-      font-size: 0.82rem;
+      font-size: var(--text-sm);
       color: var(--text-dim);
       margin-bottom: 28px;
     }
@@ -966,16 +993,16 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: var(--space-3);
       flex: 1;
-      margin-bottom: 32px;
+      margin-bottom: var(--space-8);
     }
 
     .price-features li {
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      font-size: 0.9rem;
+      font-size: var(--text-sm);
       color: var(--text-muted);
     }
 
@@ -994,7 +1021,7 @@
        FOOTER
     ════════════════════════════════ */
     footer {
-      padding: 56px 24px;
+      padding: 64px 24px;
       text-align: center;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
@@ -1005,7 +1032,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      gap: var(--space-5);
     }
 
     .footer-logo {
@@ -1029,20 +1056,20 @@
     }
 
     .footer-tagline {
-      font-size: 0.9rem;
+      font-size: var(--text-sm);
       color: var(--text-muted);
       font-weight: 500;
     }
 
     .footer-links {
       display: flex;
-      gap: 24px;
+      gap: var(--space-6);
       flex-wrap: wrap;
       justify-content: center;
     }
 
     .footer-links a {
-      font-size: 0.82rem;
+      font-size: var(--text-sm);
       color: var(--text-dim);
       text-decoration: none;
       transition: color 0.2s;
@@ -1051,7 +1078,7 @@
     .footer-links a:hover { color: var(--text); }
 
     .footer-copy {
-      font-size: 0.78rem;
+      font-size: var(--text-xs);
       color: var(--text-dim);
     }
 
@@ -1059,7 +1086,7 @@
        HOW IT WORKS
     ════════════════════════════════ */
     .hiw-label {
-      margin-bottom: 24px;
+      margin-bottom: var(--space-6);
     }
     .hiw-row {
       display: flex;
@@ -1109,7 +1136,7 @@
     }
     .hiw-title {
       font-family: 'Inter', sans-serif;
-      font-size: 1.15rem;
+      font-size: var(--text-lg);
       font-weight: 700;
       color: #FFFFFF;
       margin: 0;
@@ -1117,7 +1144,7 @@
     }
     .hiw-desc {
       font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
+      font-size: var(--text-sm);
       color: var(--text-muted);
       margin: 0;
       line-height: 1.6;
@@ -1303,7 +1330,7 @@
     <div class="margot-intro-inner">
 
       <div class="hiw-label" style="margin-bottom:24px;">
-        <span class="pixel-label" style="font-size:11px;">HOW IT WORKS</span>
+        <span class="pixel-label" style="font-size:var(--pixel-md);">HOW IT WORKS</span>
       </div>
       <h2 style="font-family:'Inter',sans-serif;font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;text-align:center;margin:12px auto 0;color:#FFFFFF;">Three steps. That's it.</h2>
 
@@ -1430,7 +1457,7 @@
   <!-- ════════════════ EVOLUTION ════════════════ -->
   <section id="evolution">
     <div style="max-width:900px;margin:0 auto;text-align:center;">
-      <div class="pixel-label" style="margin-bottom:16px;font-size:11px;">THE FLAME</div>
+      <div class="pixel-label" style="margin-bottom:16px;font-size:var(--pixel-md);">THE FLAME</div>
       <h2 class="hero-headline reveal" style="text-align:center;margin-bottom:8px;min-height:0;width:100%;margin-left:auto;margin-right:auto;">Keep the <span class="grad-text">flame</span> alive.</h2>
       <p class="hero-sub reveal" style="text-align:center;margin-top:0;margin-bottom:0;max-width:480px;margin-left:auto;margin-right:auto;">Margot grows with every keep. Tend her well.</p>
       <div class="evo-scroll-wrap" style="margin-top:32px;">
