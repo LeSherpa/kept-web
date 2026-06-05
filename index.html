@@ -1056,6 +1056,76 @@
     }
 
     /* ════════════════════════════════
+       HOW IT WORKS
+    ════════════════════════════════ */
+    #how-it-works {
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .hiw-label {
+      margin-bottom: 48px;
+    }
+    .hiw-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 48px;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .hiw-connector {
+      position: absolute;
+      top: 40px;
+      left: 15%;
+      width: 70%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #4A1A8A 20%, #C026D3 50%, #F59E0B 80%, transparent);
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hiw-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      max-width: 200px;
+      position: relative;
+      z-index: 1;
+    }
+    .hiw-icon-wrap {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+    .hiw-step-num {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      color: #9B50D8;
+      letter-spacing: 2px;
+    }
+    .hiw-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0;
+    }
+    .hiw-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ════════════════════════════════
        RESPONSIVE
     ════════════════════════════════ */
     @media (max-width: 900px) {
@@ -1148,6 +1218,52 @@
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="6 9 12 15 18 9"/>
       </svg>
+    </div>
+  </section>
+
+  <div class="pixel-divider" aria-hidden="true">
+    <div class="px-env" style="--ec:#6B21A8"></div>
+    <div class="px-env" style="--ec:#7D2B96"></div>
+    <div class="px-env" style="--ec:#8E3583"></div>
+    <div class="px-env" style="--ec:#A04071"></div>
+    <div class="px-env px-env-center" style="--ec:#B24A5F"></div>
+    <div class="px-env" style="--ec:#C4544C"></div>
+    <div class="px-env" style="--ec:#D65F3A"></div>
+    <div class="px-env" style="--ec:#E76928"></div>
+    <div class="px-env" style="--ec:#F97316"></div>
+  </div>
+
+  <!-- ════════════════ HOW IT WORKS ════════════════ -->
+  <section id="how-it-works">
+    <div class="hiw-label">
+      <span class="pixel-label">HOW IT WORKS</span>
+    </div>
+    <div class="hiw-row reveal-children">
+      <div class="hiw-connector" aria-hidden="true"></div>
+      <div class="hiw-step">
+        <div class="hiw-icon-wrap">
+          <canvas id="hiw-icon-0"></canvas>
+        </div>
+        <div class="hiw-step-num">01</div>
+        <p class="hiw-title">You keep it.</p>
+        <p class="hiw-desc">Write a message, attach a photo, pick a moment.</p>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-icon-wrap">
+          <canvas id="hiw-icon-1"></canvas>
+        </div>
+        <div class="hiw-step-num">02</div>
+        <p class="hiw-title">Margot holds it.</p>
+        <p class="hiw-desc">She keeps your secret until the time is right.</p>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-icon-wrap">
+          <canvas id="hiw-icon-2"></canvas>
+        </div>
+        <div class="hiw-step-num">03</div>
+        <p class="hiw-title">They feel it.</p>
+        <p class="hiw-desc">Delivered exactly when it matters.</p>
+      </div>
     </div>
   </section>
 
@@ -1749,6 +1865,112 @@
     drawMargot('evo-sprite-2', 6, 'growing');
     drawMargot('evo-sprite-3', 6, 'flourishing');
     drawMargot('evo-sprite-4', 6, 'legendary');
+
+    function drawEnvelope(canvasId, px) {
+      var c = document.getElementById(canvasId);
+      if (!c) return;
+      px = px || 5;
+      var grid = [
+        [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+        [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+        [1,2,3,2,2,2,2,2,2,2,2,2,2,3,2,1],
+        [1,2,2,3,2,2,2,2,2,2,2,2,3,2,2,1],
+        [1,2,2,2,3,2,2,2,2,2,2,3,2,2,2,1],
+        [1,2,2,2,2,3,2,2,2,2,3,2,2,2,2,1],
+        [1,2,2,2,2,2,3,2,2,3,2,2,2,2,2,1],
+        [1,2,2,2,2,2,2,3,3,2,2,2,2,2,2,1],
+        [1,2,2,2,2,2,2,3,3,2,2,2,2,2,2,1],
+        [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+        [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+        [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+        [1,2,2,4,4,4,4,4,4,4,4,4,4,2,2,1],
+        [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+        [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+        [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0]
+      ];
+      var colors = { 0:'transparent', 1:'#4A1A8A', 2:'#7B2FBE', 3:'#9B50D8', 4:'#F59E0B' };
+      c.width = 16 * px; c.height = 16 * px;
+      var ctx = c.getContext('2d');
+      grid.forEach(function(row, y) {
+        row.forEach(function(v, x) {
+          if (v === 0) return;
+          ctx.fillStyle = colors[v];
+          ctx.fillRect(x * px, y * px, px, px);
+        });
+      });
+    }
+
+    function drawLock(canvasId, px) {
+      var c = document.getElementById(canvasId);
+      if (!c) return;
+      px = px || 5;
+      var grid = [
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0],
+        [0,0,0,0,1,2,2,2,2,2,2,1,0,0,0,0],
+        [0,0,0,0,1,2,2,2,2,2,2,1,0,0,0,0],
+        [0,0,0,0,1,2,2,0,0,2,2,1,0,0,0,0],
+        [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+        [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+        [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+        [1,2,2,2,2,2,2,3,3,2,2,2,2,2,2,1],
+        [1,2,2,2,2,2,3,2,2,3,2,2,2,2,2,1],
+        [1,2,2,2,2,2,2,2,4,2,2,2,2,2,2,1],
+        [1,2,2,2,2,2,2,2,4,2,2,2,2,2,2,1],
+        [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+        [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+        [0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      ];
+      var colors = { 0:'transparent', 1:'#4A1A8A', 2:'#7B2FBE', 3:'#9B50D8', 4:'#F59E0B' };
+      c.width = 16 * px; c.height = 16 * px;
+      var ctx = c.getContext('2d');
+      grid.forEach(function(row, y) {
+        row.forEach(function(v, x) {
+          if (v === 0) return;
+          ctx.fillStyle = colors[v];
+          ctx.fillRect(x * px, y * px, px, px);
+        });
+      });
+    }
+
+    function drawHeart(canvasId, px) {
+      var c = document.getElementById(canvasId);
+      if (!c) return;
+      px = px || 5;
+      var grid = [
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,1,1,1,0,0,0,0,0,1,1,1,0,0,0],
+        [0,1,2,2,2,1,0,0,0,1,2,2,2,1,0,0],
+        [1,2,2,2,2,2,1,0,1,2,2,2,2,2,1,0],
+        [1,2,2,2,2,2,2,1,2,2,2,2,2,2,1,0],
+        [1,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0],
+        [0,1,2,2,2,2,2,2,2,2,2,2,2,1,0,0],
+        [0,0,1,2,2,2,2,2,2,2,2,2,1,0,0,0],
+        [0,0,0,1,2,2,2,2,2,2,2,1,0,0,0,0],
+        [0,0,0,0,1,2,2,2,2,2,1,0,0,0,0,0],
+        [0,0,0,0,0,1,2,2,2,1,0,0,0,0,0,0],
+        [0,0,0,0,0,0,1,2,1,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      ];
+      var colors = { 0:'transparent', 1:'#8B1A4A', 2:'#E8407A' };
+      c.width = 16 * px; c.height = 16 * px;
+      var ctx = c.getContext('2d');
+      grid.forEach(function(row, y) {
+        row.forEach(function(v, x) {
+          if (v === 0) return;
+          ctx.fillStyle = colors[v];
+          ctx.fillRect(x * px, y * px, px, px);
+        });
+      });
+    }
+
+    drawEnvelope('hiw-icon-0', 5);
+    drawLock('hiw-icon-1', 5);
+    drawHeart('hiw-icon-2', 5);
 
     // evo-card hover interactions
     document.querySelectorAll('.evo-card').forEach(function(card) {
