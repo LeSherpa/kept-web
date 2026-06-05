@@ -993,18 +993,36 @@
       margin-bottom: 16px;
     }
 
-    .price-badge {
-      display: inline-block;
-      align-self: flex-start;
-      padding: 5px 10px;
-      border-radius: 2px;
-      background: #7B2FBE;
+    .price-badge { display: none; }
+
+    /* fixed-height control zone keeps both cards aligned */
+    .price-control {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .billing-toggle {
+      display: inline-flex;
+      border: 2px solid #7B2FBE;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .billing-opt {
       font-family: 'Press Start 2P', monospace;
       font-size: 7px;
       letter-spacing: 1px;
       text-transform: uppercase;
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .billing-opt.billing-active {
+      background: #7B2FBE;
       color: #FFFFFF;
-      margin-bottom: 14px;
     }
 
     .price-amount {
@@ -1704,8 +1722,9 @@
 
         <div class="price-card">
           <div class="price-label">Free</div>
+          <div class="price-control" aria-hidden="true"></div>
           <div class="price-amount">€0</div>
-          <div class="price-period">&nbsp;</div>
+          <div class="price-period">forever</div>
           <div class="price-divider"></div>
           <ul class="price-features">
             <li>Unlimited text surprises</li>
@@ -1713,13 +1732,21 @@
             <li>Surprise notifications</li>
             <li>Up to 2 invitees</li>
           </ul>
+          <a href="https://t.me/getkeptbot" class="btn-primary" target="_blank" rel="noopener" style="justify-content:center">
+            Get started free
+          </a>
         </div>
 
         <div class="price-card featured">
           <div class="price-label">Plus</div>
-          <span class="price-badge">Most popular</span>
-          <div class="price-amount grad-text">€3.99</div>
-          <div class="price-period">per month &nbsp;·&nbsp; or €39.99/year — 2 months free</div>
+          <div class="price-control">
+            <div class="billing-toggle" role="group" aria-label="Billing period">
+              <button type="button" class="billing-opt billing-active" data-period="monthly">Monthly</button>
+              <button type="button" class="billing-opt" data-period="annual">Annual</button>
+            </div>
+          </div>
+          <div class="price-amount grad-text" id="plus-price">€3.99</div>
+          <div class="price-period" id="plus-period">per month</div>
           <div class="price-divider"></div>
           <ul class="price-features">
             <li>Everything in Free</li>
@@ -2334,6 +2361,26 @@
       }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
       map.forEach(function(m) { observer.observe(m.section); });
       if (hero) observer.observe(hero);
+    })();
+
+    (function() {
+      var opts = document.querySelectorAll('.billing-opt');
+      var priceEl = document.getElementById('plus-price');
+      var periodEl = document.getElementById('plus-period');
+      if (!opts.length || !priceEl || !periodEl) return;
+      var data = {
+        monthly: { price: '€3.99', period: 'per month' },
+        annual:  { price: '€39.99', period: 'per year — 2 months free' }
+      };
+      opts.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          opts.forEach(function(b) { b.classList.remove('billing-active'); });
+          btn.classList.add('billing-active');
+          var d = data[btn.getAttribute('data-period')];
+          priceEl.textContent = d.price;
+          periodEl.textContent = d.period;
+        });
+      });
     })();
   </script>
 </body>
