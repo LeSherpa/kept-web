@@ -1373,7 +1373,7 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      padding: 12px 32px;
+      padding: 14px 32px;
       background: rgba(10, 10, 12, 0.55);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
@@ -1537,43 +1537,31 @@
     button:focus:not(:focus-visible) { outline: none; }
 
     .theme-toggle {
-      width: 34px;
-      height: 34px;
-      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 38px;
+      padding: 0 12px;
       background: transparent;
       border: 2px solid var(--text-muted);
       border-radius: 4px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       flex-shrink: 0;
       transition: border-color 0.2s ease;
     }
     .theme-toggle:hover { border-color: #C026D3; }
-
-    .theme-icon-sun, .theme-icon-moon {
-      width: 4px; height: 4px;
-      display: block;
+    .theme-icon { display: flex; align-items: center; }
+    .theme-label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 7px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
     }
-    .theme-icon-sun {
-      background: #F5A800;
-      box-shadow:
-        0 -7px 0 0 #F5A800, 0 7px 0 0 #F5A800, -7px 0 0 0 #F5A800, 7px 0 0 0 #F5A800,
-        -4px -4px 0 0 #F5A800, 4px -4px 0 0 #F5A800, -4px 4px 0 0 #F5A800, 4px 4px 0 0 #F5A800,
-        0 0 0 1px #F5A800;
-    }
-    .theme-icon-moon {
-      background: #9B50D8;
-      box-shadow:
-        -3px -3px 0 0 #9B50D8, 0 -4px 0 0 #9B50D8, 3px -2px 0 0 #9B50D8,
-        -4px 0 0 0 #9B50D8, -4px 3px 0 0 #9B50D8, -2px 4px 0 0 #9B50D8, 1px 4px 0 0 #9B50D8;
-      display: none;
-    }
-    .theme-icon-sun { display: none; }
-    :root[data-theme="light"] .theme-icon-sun { display: block; }
-    :root[data-theme="light"] .theme-icon-moon { display: none; }
-    .theme-icon-moon { display: block; }
+    .theme-svg-sun { display: none; }
+    .theme-svg-moon { display: block; }
+    :root[data-theme="light"] .theme-svg-moon { display: none; }
+    :root[data-theme="light"] .theme-svg-sun { display: block; }
   </style>
 </head>
 <body>
@@ -1589,8 +1577,15 @@
       </nav>
       <div style="justify-self:end;display:flex;align-items:center;gap:14px;">
         <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle day/night mode">
-          <span class="theme-icon-sun" aria-hidden="true"></span>
-          <span class="theme-icon-moon" aria-hidden="true"></span>
+          <span class="theme-icon" aria-hidden="true">
+            <svg class="theme-svg-moon" width="16" height="16" viewBox="0 0 16 16" shape-rendering="crispEdges" fill="#9B50D8">
+              <path d="M6 1h4v1H6zM4 2h2v1H4zM10 2h2v1h-2zM3 3h1v1H3zM3 4h1v2H3zM3 6h1v4H3zM3 10h1v2H3zM4 12h2v1H4zM10 12h2v1h-2zM6 13h4v1H6z M9 3h1v1H9zM8 4h1v1H8zM8 5h1v2H8zM8 7h1v2H8zM8 9h1v1H8zM9 10h1v1H9zM10 5h1v1h-1zM10 9h1v1h-1zM11 6h1v3h-1z"/>
+            </svg>
+            <svg class="theme-svg-sun" width="16" height="16" viewBox="0 0 16 16" shape-rendering="crispEdges" fill="#F5A800">
+              <path d="M7 0h2v3H7zM7 13h2v3H7zM0 7h3v2H0zM13 7h3v2h-3zM2 2h2v2H2zM12 2h2v2h-2zM2 12h2v2H2zM12 12h2v2h-2zM6 5h4v1H6zM5 6h6v4H5zM6 10h4v1H6z"/>
+            </svg>
+          </span>
+          <span class="theme-label">Dark</span>
         </button>
         <a href="https://t.me/getkeptbot" class="nav-cta" target="_blank" rel="noopener">Try on Telegram</a>
       </div>
@@ -2548,11 +2543,14 @@
       var btn = document.getElementById('theme-toggle');
       if (!btn) return;
       var root = document.documentElement;
+      var label = btn.querySelector('.theme-label');
       btn.addEventListener('click', function() {
         if (root.getAttribute('data-theme') === 'light') {
           root.removeAttribute('data-theme');
+          if (label) label.textContent = 'Dark';
         } else {
           root.setAttribute('data-theme', 'light');
+          if (label) label.textContent = 'Light';
         }
       });
     })();
