@@ -208,7 +208,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 100px 24px;
+      padding: 120px 24px 100px;
       position: relative;
     }
 
@@ -1221,6 +1221,81 @@
     }
 
     /* ════════════════════════════════
+       NAV
+    ════════════════════════════════ */
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 14px 24px;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    .site-nav.nav-scrolled {
+      background: rgba(10, 10, 12, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-logo {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+    }
+    .nav-wordmark {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-left: auto;
+      margin-right: 24px;
+    }
+    .nav-links a {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: #FFFFFF; }
+    .nav-links a.nav-active { color: #C026D3; }
+    .nav-cta {
+      padding: 9px 18px !important;
+      font-size: 0.82rem !important;
+      flex-shrink: 0;
+    }
+    @media (max-width: 760px) {
+      .nav-links { display: none; }
+    }
+
+    /* ════════════════════════════════
        RESPONSIVE
     ════════════════════════════════ */
     @media (max-width: 900px) {
@@ -1265,6 +1340,21 @@
   </style>
 </head>
 <body>
+
+  <header class="site-nav" id="site-nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-brand">
+        <span class="nav-logo" id="nav-logo-sprite"></span>
+        <span class="nav-wordmark">Kept</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#margot-intro">How it works</a>
+        <a href="#evolution">The flame</a>
+        <a href="#pricing">Pricing</a>
+      </nav>
+      <a href="https://t.me/getkeptbot" class="nav-cta btn-primary" target="_blank" rel="noopener">Try on Telegram</a>
+    </div>
+  </header>
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
@@ -2060,6 +2150,7 @@
     drawEnvelope('hiw-icon-0', 6);
     drawLock('hiw-icon-1', 6);
     drawHeart('hiw-icon-2', 6);
+    drawMargot('nav-logo-sprite', 2);
 
     (function() {
       var bubble = document.getElementById('margot-speech-bubble');
@@ -2132,6 +2223,35 @@
         card.classList.remove('evo-hovered');
       });
     });
+
+    // nav scroll state
+    (function() {
+      var nav = document.getElementById('site-nav');
+      function onScroll() {
+        if (window.scrollY > 40) nav.classList.add('nav-scrolled');
+        else nav.classList.remove('nav-scrolled');
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    // active section highlight
+    (function() {
+      var links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+      var map = links.map(function(a) {
+        return { link: a, section: document.querySelector(a.getAttribute('href')) };
+      }).filter(function(m) { return m.section; });
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            map.forEach(function(m) { m.link.classList.remove('nav-active'); });
+            var match = map.find(function(m) { return m.section === entry.target; });
+            if (match) match.link.classList.add('nav-active');
+          }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+      map.forEach(function(m) { observer.observe(m.section); });
+    })();
   </script>
 </body>
 </html>
